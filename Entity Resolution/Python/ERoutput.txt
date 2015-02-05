@@ -1,0 +1,846 @@
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> ================================ RESTART ================================
+Starting
+1114 https://www.linkedin.com/pub/mark-stevenson/2/469/131
+Rows deleted from linkedin_affiliation table: 0
+
+1115 https://www.linkedin.com/pub/mark-stevenson-md-mph/44/348/48a
+Rows deleted from linkedin_affiliation table: 0
+insert university San Diego State University-California State University
+insert university University of California, San Diego
+insert university The Ohio State University
+insert university The Ohio State University
+
+1116 https://www.linkedin.com/pub/mark-stevenson/9/b1a/836
+Rows deleted from linkedin_affiliation table: 0
+
+1117 https://www.linkedin.com/pub/mark-stevenson-cfa/6/666/548
+Rows deleted from linkedin_affiliation table: 0
+insert university Penn State University
+insert university American University
+
+1118 https://www.linkedin.com/in/stevenson2salesmanagement
+Rows deleted from linkedin_affiliation table: 0
+
+1119 https://www.linkedin.com/pub/mark-j-stevenson-fache-chie/8/4b8/346
+Rows deleted from linkedin_affiliation table: 0
+insert university Naval Postgraduate School
+insert university Chapman University
+insert university Southern Illinois University, Carbondale
+insert university Northwestern University - Kellogg School of Management
+insert university Georgetown University
+
+1120 https://www.linkedin.com/pub/mark-l-stevenson/3/b05/674
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University School of Law
+insert university Old Dominion University
+
+1121 https://www.linkedin.com/pub/mark-r-stevenson/12/18b/856
+Rows deleted from linkedin_affiliation table: 0
+insert university Iowa State University - College of Business
+
+1122 https://www.linkedin.com/pub/mark-d-stevenson-d-d-s/12/32a/b08
+Rows deleted from linkedin_affiliation table: 0
+insert university Georgetown University
+insert university UC Berkeley
+
+1123 http://www.linkedin.com/pub/mark-stevenson-fuo/13/b17/b8
+Rows deleted from linkedin_affiliation table: 0
+
+1124 http://www.linkedin.com/pub/mark-stevenson-fuo/13/b17/b8
+Rows deleted from linkedin_affiliation table: 0
+
+1125 https://www.linkedin.com/pub/rigsby-shirley-mark-stevenson/25/262/103
+Rows deleted from linkedin_affiliation table: 0
+
+1126 https://www.linkedin.com/pub/mark-stevenson-ieng-miet/15/210/621
+Rows deleted from linkedin_affiliation table: 0
+insert university Aberdeen College
+
+1127 https://www.linkedin.com/pub/mark-%22hammer%22-stevenson/57/60a/678
+Rows deleted from linkedin_affiliation table: 0
+insert university Texas State University-San Marcos
+
+1128 https://www.linkedin.com/pub/marcus-stevenson/14/741/7a2
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Houston Law Center
+insert university Boston College Law School
+insert university Texas A&amp;M University
+
+1129 https://www.linkedin.com/pub/marcus-d-stevenson/30/312/634
+Rows deleted from linkedin_affiliation table: 0
+
+1130 http://www.linkedin.com/pub/marcus-stevenson-wb5lfs/92/16b/a3
+Rows deleted from linkedin_affiliation table: 0
+
+1131 https://www.linkedin.com/pub/marcus-wilson-stevenson/73/415/918
+Rows deleted from linkedin_affiliation table: 0
+
+1132 https://www.linkedin.com/pub/marcus-wilsons-stevenson/73/275/416
+Rows deleted from linkedin_affiliation table: 0
+
+1133 http://www.linkedin.com/pub/jessica-totty/52/a27/a2b
+Rows deleted from linkedin_affiliation table: 0
+
+1134 http://www.linkedin.com/pub/jessica-totty/33/304/469
+Rows deleted from linkedin_affiliation table: 0
+
+1135 https://www.linkedin.com/pub/chelsea-kelley/9/a3b/24a
+Rows deleted from linkedin_affiliation table: 0
+insert university Southern California University of Health Sciences
+insert university Texas State University-San Marcos
+
+1136 http://www.linkedin.com/pub/chelsea-o-kelley/64/b65/469
+Rows deleted from linkedin_affiliation table: 0
+
+1137 https://www.linkedin.com/in/joedobrota
+Rows deleted from linkedin_affiliation table: 3
+insert university Old Dominion University
+insert university Regent University
+insert university Susquehanna University
+
+1138 https://www.linkedin.com/in/joemdobrota
+Rows deleted from linkedin_affiliation table: 1
+insert university Lehigh University
+
+1139 https://www.linkedin.com/pub/joe-dobrota/88/9b9/a93
+Rows deleted from linkedin_affiliation table: 0
+
+1140 https://www.linkedin.com/in/victorialynnwalker
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university University of Hawaii at Manoa
+insert university University of Hawaii at Manoa
+
+1141 https://www.linkedin.com/in/ladyvictoriawalker
+Rows deleted from linkedin_affiliation table: 0
+insert university Syracuse University
+
+1142 https://www.linkedin.com/pub/victoria-m-walker/47/175/802
+Rows deleted from linkedin_affiliation table: 0
+insert university Howard University
+
+1143 https://www.linkedin.com/pub/victoria-walker-jd-mpp/94/328/296
+Rows deleted from linkedin_affiliation table: 0
+insert university George Mason University School of Law
+insert university University of Virginia
+
+1144 https://www.linkedin.com/pub/victoria-walker-massey-phd/19/569/786
+Rows deleted from linkedin_affiliation table: 0
+insert university University of North Carolina at Chapel Hill
+
+1145 https://www.linkedin.com/in/avivictoria
+Rows deleted from linkedin_affiliation table: 0
+insert university Spelman College
+insert university Bank Street College of Education
+
+1146 https://www.linkedin.com/pub/victoria-walker-bibbs/15/812/489
+Rows deleted from linkedin_affiliation table: 0
+
+1147 https://www.linkedin.com/pub/victoria-walker-lynch/97/901/751
+Rows deleted from linkedin_affiliation table: 0
+
+1148 https://www.linkedin.com/in/vlwalker
+Rows deleted from linkedin_affiliation table: 0
+insert university Liberty University
+insert university Liberty University
+insert university Edison Community College
+
+1149 https://www.linkedin.com/pub/victoria-victoria-walker/37/a68/5a2
+Rows deleted from linkedin_affiliation table: 0
+
+1150 https://www.linkedin.com/pub/victoria-walker-black/99/764/482
+Rows deleted from linkedin_affiliation table: 0
+
+1151 https://www.linkedin.com/pub/victoria-walker/45/162/296
+Rows deleted from linkedin_affiliation table: 0
+
+1152 https://www.linkedin.com/pub/chef-victoria-walker/81/aa8/8b6
+Rows deleted from linkedin_affiliation table: 0
+insert university Tidewater Community College
+
+1153 https://www.linkedin.com/pub/victoria-tori-walker/6b/277/96
+Rows deleted from linkedin_affiliation table: 0
+insert university Northern Virginia Community College
+insert university Northern Virginia Community College
+insert university University of Mary Washington
+
+1154 https://www.linkedin.com/pub/toria-walker/3/656/53a
+Rows deleted from linkedin_affiliation table: 0
+
+1155 https://www.linkedin.com/pub/torrie-walker/20/44/854
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Maryland University College
+
+1156 https://www.linkedin.com/pub/tory-walker-pe-cfm-leed-ga/12/30/52a
+Rows deleted from linkedin_affiliation table: 0
+insert university University of California, Irvine
+insert university Westmont College
+
+1157 https://www.linkedin.com/pub/tory-walker/4/b82/476
+Rows deleted from linkedin_affiliation table: 0
+insert university Duke University
+
+1158 https://www.linkedin.com/pub/tory-connolly-walker/16/7ba/990
+Rows deleted from linkedin_affiliation table: 0
+
+1159 https://www.linkedin.com/pub/vicki-lucero-walker/49/a33/a26
+Rows deleted from linkedin_affiliation table: 0
+insert university New Mexico State University
+
+1160 https://www.linkedin.com/pub/victor-r-walker/49/498/99a
+Rows deleted from linkedin_affiliation table: 0
+insert university Los Angeles City College
+
+1161 https://www.linkedin.com/pub/linda-walker-victor-linda/a7/a93/68a
+Rows deleted from linkedin_affiliation table: 0
+
+1162 https://www.linkedin.com/pub/victor-k-walker/a5/416/a21
+Rows deleted from linkedin_affiliation table: 0
+
+1163 https://www.linkedin.com/pub/victor-hugo-walker-castro/63/58a/722
+Rows deleted from linkedin_affiliation table: 0
+
+1164 https://www.linkedin.com/in/gracealegre
+Rows deleted from linkedin_affiliation table: 0
+HTTP Error 404: Not Found
+1165 http://www.linkedin.com/pub/karen-grace-alegre/98/2b6/280
+Rows deleted from linkedin_affiliation table: 0
+
+1166 https://www.linkedin.com/pub/lena-maslennikova-dsl-mba/4/a4a/893
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+
+1167 https://www.linkedin.com/pub/sean-kirnan/13/44a/352
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Bucknell University
+insert university Bucknell University
+
+1168 https://www.linkedin.com/pub/kita-graham/8/837/3ba
+Rows deleted from linkedin_affiliation table: 0
+
+1169 https://www.linkedin.com/pub/kita-graham-m-a/25/6b0/490
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Regent University
+insert university Middle Tennessee State University
+
+1170 http://www.linkedin.com/pub/kita-graham-mol/25/6b0/490?trk=feed-liker
+Rows deleted from linkedin_affiliation table: 0
+
+1171 https://www.linkedin.com/pub/donnie-staggs/66/86a/816
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Regent University
+insert university Northeastern State University
+insert university Oral Roberts University
+insert university Oral Roberts University
+
+1172 https://www.linkedin.com/in/jamiesbrennan
+Rows deleted from linkedin_affiliation table: 0
+insert university Florida Southern College
+
+1173 https://www.linkedin.com/in/jamieabrennan
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Southern Maine
+insert university Wheaton College
+
+1174 https://www.linkedin.com/pub/jamie-lee-brennan/40/55/713
+Rows deleted from linkedin_affiliation table: 0
+
+1175 https://www.linkedin.com/in/benjaminbrennan5386
+Rows deleted from linkedin_affiliation table: 0
+insert university State University of New York at Albany
+insert university Assumption College
+
+1176 http://www.linkedin.com/pub/brennan-benjamin/87/7b8/23
+Rows deleted from linkedin_affiliation table: 0
+
+1177 https://www.linkedin.com/pub/james-w-brennan/17/338/38a
+Rows deleted from linkedin_affiliation table: 0
+insert university University of San Diego
+
+1178 https://www.linkedin.com/in/jamesandrewbrennan
+Rows deleted from linkedin_affiliation table: 0
+insert university Georgetown University Law Center
+insert university Wake Forest University School of Law
+insert university University of Scranton
+
+1179 https://www.linkedin.com/pub/james-brennan/0/15/b10
+Rows deleted from linkedin_affiliation table: 0
+insert university Duke University
+
+1180 https://www.linkedin.com/in/jamesrbrennan
+Rows deleted from linkedin_affiliation table: 0
+insert university New York University - Leonard N. Stern School of Business
+insert university Cornell University
+insert university Farmingdale State University of New York
+
+1181 https://www.linkedin.com/in/brennanurs
+Rows deleted from linkedin_affiliation table: 0
+insert university The Ohio State University
+insert university The Ohio State University
+insert university Liverpool Hope University
+insert university Kingston University
+
+1182 https://www.linkedin.com/in/jamesmbrennan
+Rows deleted from linkedin_affiliation table: 0
+insert university Darden Business School
+
+1183 https://www.linkedin.com/in/jamesebrennancfp
+Rows deleted from linkedin_affiliation table: 0
+
+1184 https://www.linkedin.com/pub/james-p-brennan-cfe/9/24b/752
+Rows deleted from linkedin_affiliation table: 0
+insert university Saint John&#39;s University - Peter J. Tobin College of Business
+insert university Saint John&#39;s University - Peter J. Tobin College of Business
+
+1185 https://www.linkedin.com/pub/james-brennan-marlowe/59/2bb/235
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Mississippi
+
+1186 https://www.linkedin.com/pub/james-r-brennan/10/a82/639
+Rows deleted from linkedin_affiliation table: 0
+
+1187 https://www.linkedin.com/pub/james-brennan-jb-hensley/64/85b/890
+Rows deleted from linkedin_affiliation table: 0
+insert university Florida State University
+
+1188 https://www.linkedin.com/pub/erin-james-brennan/a6/207/985
+Rows deleted from linkedin_affiliation table: 0
+insert university Boise State University
+
+1189 https://www.linkedin.com/in/jamesbrennanii
+Rows deleted from linkedin_affiliation table: 0
+
+1190 https://www.linkedin.com/pub/james-r-brennan/15/1b7/130
+Rows deleted from linkedin_affiliation table: 0
+
+1191 https://www.linkedin.com/pub/james-j-brennan/9/453/407
+Rows deleted from linkedin_affiliation table: 0
+insert university SUNY Oswego
+
+1192 https://www.linkedin.com/pub/james-patrick-brennan/52/794/621
+Rows deleted from linkedin_affiliation table: 0
+insert university State University of New York at Albany
+
+1193 https://www.linkedin.com/pub/james-patrick-pat-brennan/9a/480/271
+Rows deleted from linkedin_affiliation table: 0
+insert university Michigan State University College of Law
+insert university University of Detroit Mercy
+insert university John Carroll University
+
+1194 https://www.linkedin.com/pub/brennan-james/37/569/28
+Rows deleted from linkedin_affiliation table: 0
+insert university UC Berkeley
+insert university UC San Diego
+
+1195 https://www.linkedin.com/pub/james-jay-brennan/a/61/662
+Rows deleted from linkedin_affiliation table: 0
+insert university Syracuse University
+
+1196 https://www.linkedin.com/pub/james-brennan/0/b35/605
+Rows deleted from linkedin_affiliation table: 0
+
+1197 http://www.linkedin.com/pub/carlo-james-brennan/1a/b1b/909
+Rows deleted from linkedin_affiliation table: 0
+insert university ESADE Business School
+insert university Universit&#xe0; degli Studi di Cagliari
+insert university Georg-Simon-Ohm-Fachhochschule N&#xfc;rnberg
+
+1198 http://www.linkedin.com/pub/james-brennan/9b/925/a03
+Rows deleted from linkedin_affiliation table: 0
+
+1199 https://www.linkedin.com/pub/james-brennan/49/745/ab4
+Rows deleted from linkedin_affiliation table: 0
+insert university Macomb Community College
+insert university Macomb Community College
+
+1200 https://www.linkedin.com/pub/brennan-james-malone-cfp%c2%ae/77/a72/2ba
+Rows deleted from linkedin_affiliation table: 0
+insert university The American College
+insert university University of California, Santa Barbara
+
+1201 https://www.linkedin.com/pub/james-christopher-brennan/26/9a0/551
+Rows deleted from linkedin_affiliation table: 0
+
+1202 https://www.linkedin.com/pub/pamela-lee/53/b8a/750
+Rows deleted from linkedin_affiliation table: 0
+insert university Harvard University Graduate School of Design
+insert university Cornell University
+
+1203 https://www.linkedin.com/pub/pamela-lee-alvarez/4/11a/317
+Rows deleted from linkedin_affiliation table: 0
+insert university University of California, San Diego
+
+1204 https://www.linkedin.com/in/pamelaalee
+Rows deleted from linkedin_affiliation table: 0
+insert university Widener University School of Law
+insert university Rutgers University
+
+1205 https://www.linkedin.com/pub/pamela-lee-cpa/13/767/150
+Rows deleted from linkedin_affiliation table: 0
+
+1206 https://www.linkedin.com/in/pamelalacey
+Rows deleted from linkedin_affiliation table: 0
+insert university Point Loma Nazarene University
+insert university San Diego State University
+
+1207 https://www.linkedin.com/in/pamelablair
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Colorado at Denver
+insert university Sam Houston State University
+insert university University of Nebraska-Lincoln
+
+1208 https://www.linkedin.com/pub/pamela-lee-frison/17/2a/897
+Rows deleted from linkedin_affiliation table: 0
+
+1209 https://www.linkedin.com/in/pamelaaleecpa
+Rows deleted from linkedin_affiliation table: 0
+insert university San Francisco State University
+
+1210 http://www.linkedin.com/pub/pamela-lee/11/439/324?trk=pub-pbmap
+Rows deleted from linkedin_affiliation table: 0
+insert university George Mason University School of Law
+insert university Wayne State University
+insert university Wayne State University
+
+1211 https://www.linkedin.com/in/pamelaleethomas
+Rows deleted from linkedin_affiliation table: 0
+
+1212 https://www.linkedin.com/pub/pamela-lee-galloway/42/71b/47b
+Rows deleted from linkedin_affiliation table: 0
+insert university University of San Francisco
+insert university University of Arizona
+
+1213 https://www.linkedin.com/pub/pamela-lee-mccleave/47/7a3/b21
+Rows deleted from linkedin_affiliation table: 0
+insert university Virginia Commonwealth University
+insert university Mary Washington College
+
+1214 https://www.linkedin.com/pub/pamela-lee-jackson/80/649/550
+Rows deleted from linkedin_affiliation table: 0
+
+1215 https://www.linkedin.com/pub/pamela-lee-brown/23/484/8bb
+Rows deleted from linkedin_affiliation table: 0
+insert university Colorado Technical University
+
+1216 https://www.linkedin.com/pub/m-pamela-lee/b/ba9/609
+Rows deleted from linkedin_affiliation table: 0
+
+1217 https://www.linkedin.com/pub/pamela-lee-lamb/82/506/89a
+Rows deleted from linkedin_affiliation table: 0
+
+1218 https://www.linkedin.com/pub/pamela-lee-sanders/18/aab/7bb
+Rows deleted from linkedin_affiliation table: 0
+
+1219 https://www.linkedin.com/pub/pamela-lee-crandall/53/855/5a0
+Rows deleted from linkedin_affiliation table: 0
+
+1220 https://www.linkedin.com/pub/pamela-lee-thompson-cfp-crpc/34/85a/b4
+Rows deleted from linkedin_affiliation table: 0
+insert university Claremont Graduate University - Peter F. Drucker and Masatoshi Ito Graduate School of Management
+insert university California State Polytechnic University-Pomona
+
+1221 https://www.linkedin.com/pub/pamela-kierein-lee/9/677/7ab
+Rows deleted from linkedin_affiliation table: 0
+insert university Thunderbird School of Global Management
+insert university University of San Diego
+
+1222 https://www.linkedin.com/pub/pamela-lee-jenkins/7b/a93/a44
+Rows deleted from linkedin_affiliation table: 0
+insert university Mount Olive College
+insert university Mount Olive College
+
+1223 https://www.linkedin.com/pub/pamela-lee-white/1/976/8a
+Rows deleted from linkedin_affiliation table: 0
+
+1224 https://www.linkedin.com/in/downesdesigns
+Rows deleted from linkedin_affiliation table: 0
+insert university Moore College of Art and Design
+
+1225 http://www.linkedin.com/pub/pamela-lee-lee/86/758/6a8
+Rows deleted from linkedin_affiliation table: 0
+
+1226 http://www.linkedin.com/in/pamleetaylorwebartdirector
+Rows deleted from linkedin_affiliation table: 0
+insert university Parsons School of Design
+insert university State University of New York at New Paltz
+
+1227 https://www.linkedin.com/in/pursestrings
+Rows deleted from linkedin_affiliation table: 0
+insert university University of California, Berkeley
+
+1228 https://www.linkedin.com/pub/pamela-d-lee/14/669/531
+Rows deleted from linkedin_affiliation table: 0
+
+1229 http://www.linkedin.com/pub/pamela-lee-mei-nah/37/961/327
+Rows deleted from linkedin_affiliation table: 0
+insert university Kolej Han Chiang
+
+1230 https://www.linkedin.com/pub/pamela-j-lee/30/341/a7
+Rows deleted from linkedin_affiliation table: 0
+
+1231 https://www.linkedin.com/pub/pamela-t-lee/39/232/573
+Rows deleted from linkedin_affiliation table: 0
+
+1232 https://www.linkedin.com/pub/pamela-lee-yew-fong/30/70/3a1
+Rows deleted from linkedin_affiliation table: 0
+
+1233 https://www.linkedin.com/in/pamdavislee
+Rows deleted from linkedin_affiliation table: 0
+
+1234 https://www.linkedin.com/pub/pamela-colvin-lee/51/a12/48b
+Rows deleted from linkedin_affiliation table: 0
+
+1235 https://www.linkedin.com/pub/pam-lee-miller/39/876/7b8
+Rows deleted from linkedin_affiliation table: 0
+
+1236 http://www.linkedin.com/pub/pam-lee/17/555/468
+Rows deleted from linkedin_affiliation table: 0
+
+1237 https://www.linkedin.com/pub/pam-lee-bhs-his-mha/46/208/97
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Phoenix
+insert university University of Phoenix
+
+1238 https://www.linkedin.com/pub/pam-flavin-lee/59/a67/195
+Rows deleted from linkedin_affiliation table: 0
+insert university New England College
+
+1239 https://www.linkedin.com/pub/pam-lee-bba/53/6b8/698
+Rows deleted from linkedin_affiliation table: 0
+
+1240 http://www.linkedin.com/pub/pam-lee/70/a27/329
+Rows deleted from linkedin_affiliation table: 0
+
+1241 https://www.linkedin.com/pub/pam-tau-lee/9/874/665
+Rows deleted from linkedin_affiliation table: 0
+
+1242 http://www.linkedin.com/pub/nathaniel-richner/2b/483/a81
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+
+1243 https://www.linkedin.com/in/mitchelljoshua
+Rows deleted from linkedin_affiliation table: 0
+
+1244 https://www.linkedin.com/in/lecolourverde
+Rows deleted from linkedin_affiliation table: 0
+
+1245 https://www.linkedin.com/in/kbntv
+Rows deleted from linkedin_affiliation table: 0
+
+1246 http://www.linkedin.com/pub/joshua-mitchell/65/579/497
+Rows deleted from linkedin_affiliation table: 0
+insert university Full Sail University
+
+1247 https://www.linkedin.com/pub/dr-joshua-mitchell/30/320/40a
+Rows deleted from linkedin_affiliation table: 0
+insert university Southern California University of Health Sciences
+insert university Indiana University&#x2014;Purdue University Fort Wayne
+
+1248 https://www.linkedin.com/pub/joshua-b-mitchell/58/a98/b43
+Rows deleted from linkedin_affiliation table: 0
+insert university Charleston School of Law
+insert university Winthrop University
+
+1249 https://www.linkedin.com/pub/joshua-mitchell/80/894/886
+Rows deleted from linkedin_affiliation table: 0
+
+1250 https://www.linkedin.com/in/jmitchell8
+Rows deleted from linkedin_affiliation table: 0
+insert university Full Sail University
+
+1251 https://www.linkedin.com/in/joshuamitchell
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Maryland College Park
+
+1252 https://www.linkedin.com/pub/josh-mitchell/63/395/250
+Rows deleted from linkedin_affiliation table: 0
+
+1253 https://www.linkedin.com/pub/mitchell-josh-csm/23/3b3/80a
+Rows deleted from linkedin_affiliation table: 0
+insert university Oregon State University
+
+1254 http://www.linkedin.com/pub/josh-mitchell/45/b60/162
+Rows deleted from linkedin_affiliation table: 0
+
+1255 http://www.linkedin.com/pub/josh-mitchell/92/74a/577
+Rows deleted from linkedin_affiliation table: 0
+
+1256 https://www.linkedin.com/in/jacobaffinito
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+
+1257 http://www.linkedin.com/pub/augusta-hayward/10/969/760
+Rows deleted from linkedin_affiliation table: 0
+
+1258 https://www.linkedin.com/pub/chad-clukey/16/8b4/a16
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+
+1259 https://www.linkedin.com/in/mikeackermanzga
+Rows deleted from linkedin_affiliation table: 0
+insert university Franklin Pierce Law Center
+insert university Fairleigh Dickinson University &#x2013; Vancouver
+
+1260 https://www.linkedin.com/pub/mike-ackerman/49/13b/77b
+Rows deleted from linkedin_affiliation table: 0
+
+1261 https://www.linkedin.com/pub/ackerman-mike-audio-guy/75/ab7/950
+Rows deleted from linkedin_affiliation table: 0
+
+1262 https://www.linkedin.com/in/miketackerman
+Rows deleted from linkedin_affiliation table: 0
+
+1263 https://www.linkedin.com/in/mackerman
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Massachusetts at Amherst - Isenberg School of Management
+insert university Yeshiva University
+insert university Duke University
+
+1264 https://www.linkedin.com/pub/michael-ackerman/47/739/97b
+Rows deleted from linkedin_affiliation table: 0
+insert university Harvard Kennedy School of Government
+insert university Fort Lewis College
+insert university Harvard University Graduate School of Education
+insert university Prescott College
+
+1265 https://www.linkedin.com/pub/michael-ackerman-esq/1/3aa/143
+Rows deleted from linkedin_affiliation table: 0
+
+1266 https://www.linkedin.com/pub/michael-ackerman-jr/15/781/b32
+Rows deleted from linkedin_affiliation table: 0
+
+1267 https://www.linkedin.com/pub/michael-d-ackerman/15/b9/681
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Colorado Boulder
+
+1268 http://www.linkedin.com/pub/dr-michael-ackerman/15/a29/892
+Rows deleted from linkedin_affiliation table: 0
+insert university Whitman College
+
+1269 http://www.linkedin.com/pub/michael-ackerman-ta/63/979/b55?trk=pub-pbmap
+Rows deleted from linkedin_affiliation table: 0
+
+1270 https://www.linkedin.com/pub/michael-b-ackerman/2a/215/993
+Rows deleted from linkedin_affiliation table: 0
+
+1271 https://www.linkedin.com/pub/michael-ackerman-lmsw/7/7a7/851
+Rows deleted from linkedin_affiliation table: 0
+insert university Fordham University
+insert university Vassar College
+
+1272 https://www.linkedin.com/pub/michael-ackerman-ackerman/85/608/b45
+Rows deleted from linkedin_affiliation table: 0
+
+1273 https://www.linkedin.com/pub/dwain-michael-ackerman-ii/44/908/55a
+Rows deleted from linkedin_affiliation table: 0
+insert university Central Michigan University
+
+1274 http://www.linkedin.com/pub/michael-g-ackerman/34/1a8/222?trk=pub-pbmap
+Rows deleted from linkedin_affiliation table: 0
+insert university Hastings College of the Law
+insert university San Francisco State University
+
+1275 https://www.linkedin.com/pub/michael-i-ackerman/5/791/846
+Rows deleted from linkedin_affiliation table: 0
+insert university Temple University - Fox School of Business and Management
+insert university Penn State University
+
+1276 http://www.linkedin.com/pub/michael-a-ackerman/2b/766/478
+Rows deleted from linkedin_affiliation table: 0
+
+1277 https://www.linkedin.com/in/bohdan
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Art Institute of Atlanta
+insert university National University &#39;Ivan Franko&#39; , Lviv
+
+1278 https://www.linkedin.com/pub/kyle-graham/10/a32/1a7
+Rows deleted from linkedin_affiliation table: 0
+insert university Franklin Pierce College
+
+1279 https://www.linkedin.com/pub/kyle-graham-cpa/20/937/b2a
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Wisconsin-Oshkosh
+
+1280 https://www.linkedin.com/pub/kyle-graham-johnson/1b/a2/853
+Rows deleted from linkedin_affiliation table: 0
+insert university Salem State College
+
+1281 https://www.linkedin.com/pub/kyle-j-graham/51/b43/174
+Rows deleted from linkedin_affiliation table: 0
+
+1282 https://www.linkedin.com/in/kwmgraham
+Rows deleted from linkedin_affiliation table: 0
+insert university Texas A&amp;M University
+
+1283 http://www.linkedin.com/pub/kyle-graham/a0/99b/400
+Rows deleted from linkedin_affiliation table: 0
+
+1284 https://www.linkedin.com/pub/kyle-graham-sound-graham/a7/602/84b
+Rows deleted from linkedin_affiliation table: 0
+
+1285 https://www.linkedin.com/pub/graham-kyle/56/649/272
+Rows deleted from linkedin_affiliation table: 0
+insert university Arizona State University
+
+1286 https://www.linkedin.com/pub/julian-kyle-castro-graham/54/b11/99b
+Rows deleted from linkedin_affiliation table: 0
+
+1288 http://www.linkedin.com/pub/ella-thompson/49/b4a/b91
+Rows deleted from linkedin_affiliation table: 0
+
+1289 https://www.linkedin.com/pub/ella-thompson-ph-d/11/771/b68
+Rows deleted from linkedin_affiliation table: 0
+insert university King&#39;s College London, U. of London
+insert university Regent University
+insert university Regent University
+insert university Virginia Commonwealth University - School of Business
+
+1290 https://www.linkedin.com/pub/dan-ella-thompson/73/682/34a
+Rows deleted from linkedin_affiliation table: 0
+
+1291 https://www.linkedin.com/pub/thompson-ella/46/847/41
+Rows deleted from linkedin_affiliation table: 0
+insert university University of Washington
+insert university Seattle Central Community College
+
+1292 https://www.linkedin.com/pub/pastor-ella-thompson/56/942/3a1
+Rows deleted from linkedin_affiliation table: 0
+
+1293 https://www.linkedin.com/pub/ella-lou-thompson/7/a73/10a
+Rows deleted from linkedin_affiliation table: 0
+insert university Bethel University
+insert university North Hennepin Community College
+
+1294 https://www.linkedin.com/pub/ella-mae-thompson/46/492/bab
+Rows deleted from linkedin_affiliation table: 0
+
+1295 https://www.linkedin.com/pub/ella-belzberg-thompson/6/211/90b
+Rows deleted from linkedin_affiliation table: 0
+insert university University of California, Los Angeles
+insert university University of California, Santa Barbara
+
+1296 https://www.linkedin.com/pub/ella-jan-thompson-crumbley/4a/4/249
+Rows deleted from linkedin_affiliation table: 0
+
+1297 https://www.linkedin.com/in/eleanorthompson1
+Rows deleted from linkedin_affiliation table: 0
+insert university Harvard University
+
+1298 https://www.linkedin.com/pub/eleanor-eleanor-thompson/57/b30/13a
+Rows deleted from linkedin_affiliation table: 0
+
+1299 https://www.linkedin.com/pub/eleanor-merlin-thompson/36/350/7a3
+Rows deleted from linkedin_affiliation table: 0
+
+1300 http://www.linkedin.com/pub/eleanor-susie-thompson/46/75b/2
+Rows deleted from linkedin_affiliation table: 0
+
+1301 http://www.linkedin.com/pub/eleanor-clancy-thompson/22/731/253/
+Rows deleted from linkedin_affiliation table: 0
+
+1302 https://www.linkedin.com/in/gabthompson
+Rows deleted from linkedin_affiliation table: 0
+insert university Ringling School of Art and Design
+
+1303 https://www.linkedin.com/in/pearlsofwisdom
+Rows deleted from linkedin_affiliation table: 0
+insert university Naval Postgraduate School
+insert university Winona State University
+
+1304 https://www.linkedin.com/pub/helen-thompson/8/405/49a
+Rows deleted from linkedin_affiliation table: 0
+
+1305 https://www.linkedin.com/in/kellyhelenthompson
+Rows deleted from linkedin_affiliation table: 0
+insert university Hillsborough Community College
+insert university Madison Area Technical College
+
+1306 https://www.linkedin.com/pub/mary-helen-thompson/27/14a/95
+Rows deleted from linkedin_affiliation table: 0
+
+1307 https://www.linkedin.com/pub/helen-thompson-berrevoets/18/846/80a
+Rows deleted from linkedin_affiliation table: 0
+
+1308 https://www.linkedin.com/pub/helen-thompson-thompson/85/439/57b
+Rows deleted from linkedin_affiliation table: 0
+
+1309 http://www.linkedin.com/pub/helen-thompson-costello/43/421/85b
+Rows deleted from linkedin_affiliation table: 0
+
+1310 https://www.linkedin.com/pub/luella-thompson/76/b56/669
+Rows deleted from linkedin_affiliation table: 0
+
+1311 https://www.linkedin.com/pub/gabrielle-thompson/b/29a/127
+Rows deleted from linkedin_affiliation table: 0
+
+1312 http://www.linkedin.com/pub/a-gabrielle-thompson/a/122/130
+Rows deleted from linkedin_affiliation table: 0
+
+1313 https://www.linkedin.com/pub/gabrielle-anderson-thompson/32/a51/62
+Rows deleted from linkedin_affiliation table: 0
+insert university University of California, San Diego
+
+1314 https://www.linkedin.com/pub/gabrielle-vuyk-thompson/57/8b5/78b
+Rows deleted from linkedin_affiliation table: 0
+insert university WGU Texas
+
+1315 https://www.linkedin.com/in/jaredbeasley
+Rows deleted from linkedin_affiliation table: 0
+insert university The University of Tennessee at Chattanooga
+
+1316 https://www.linkedin.com/in/jaredcbeasley
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Regent University
+insert university Evangel University
+
+1317 https://www.linkedin.com/pub/jared-beasley/58/b9a/78
+Rows deleted from linkedin_affiliation table: 0
+insert university Columbia Southern University
+
+1318 https://www.linkedin.com/pub/marc-santom/45/911/989
+Rows deleted from linkedin_affiliation table: 0
+insert university Regent University
+insert university Geneva College
+
+1319 https://www.linkedin.com/pub/patricia-mercier/19/ab5/442
+Rows deleted from linkedin_affiliation table: 0
+
+1320 https://www.linkedin.com/pub/lili-patricia-mercier/64/42/79a
+Rows deleted from linkedin_affiliation table: 0
+
+1321 https://www.linkedin.com/pub/patricia-mercier-bareck/45/bb8/635
+Rows deleted from linkedin_affiliation table: 0
+
+1322 https://www.linkedin.com/pub/patricia-mollet-mercier/28/867/66a
+Rows deleted from linkedin_affiliation table: 0
+
+1323 https://www.linkedin.com/pub/pat-mercier/1/691/195
+Rows deleted from linkedin_affiliation table: 0
+
+1324 http://www.linkedin.com/pub/pat-n-tracy-mercier/30/bb0/8a8
+Rows deleted from linkedin_affiliation table: 0
+
+1325 https://www.linkedin.com/in/patrickmercier
+Rows deleted from linkedin_affiliation table: 0
+insert university Massachusetts Institute of Technology
+insert university Massachusetts Institute of Technology
+insert university University of Alberta
+
+1326 https://www.linkedin.com/pub/patty-mercier/95/787/27
+Rows deleted from linkedin_affiliation table: 0
+insert university Long Beach City College
+
+1327 https://www.linkedin.com/pub/tricia-mercier/73/a34/ba4
+Rows deleted from linkedin_affiliation table: 0
+
+1328 http://www.linkedin.com/pub/trish-mercier/36/22/796
+Rows deleted from linkedin_affiliation table: 0
+
+>>> 

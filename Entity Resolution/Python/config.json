@@ -1,0 +1,20 @@
+ # config-file-type: JSON 1
+ {
+	# mySQL connection
+    "host" : "localhost",
+    "user" : "corren",
+    "passwd" : "c0ree3n",
+    "db"  : "corren",
+	
+    # some colors to choose from
+    "colors" : [ "red", "green", "blue" ],
+
+    # some statistics
+    "stats" : {
+            "health" : 32,
+            "vitality" : 11
+    }
+
+    # including another file
+    #"includes" : ["macros.conf"]
+ }

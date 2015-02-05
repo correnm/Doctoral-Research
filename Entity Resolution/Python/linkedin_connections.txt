@@ -1,0 +1,67 @@
++--------------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------+
+| Name                           | Location                        | URL                                                                                                        |
++--------------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------+
+| Phillip E. Jackson, DSL, FACHE | Chattanooga, Tennessee Area     | https://www.linkedin.com/profile/view?id=44019831&authType=name&authToken=QWDY&trk=api*a3630343*s3700873*  |
+| Rich Kidd                      | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=120457064&authType=name&authToken=gdRp&trk=api*a3630343*s3700873* |
+| Dr. David J. Meyer             | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=42793371&authType=name&authToken=IiZ9&trk=api*a3630343*s3700873*  |
+| Kita Graham, M.A.              | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=88315308&authType=name&authToken=vKNf&trk=api*a3630343*s3700873*  |
+| Saranette Williams             | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=22270871&authType=name&authToken=Gryb&trk=api*a3630343*s3700873*  |
+| J Darin Wales                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=5500708&authType=name&authToken=ErAq&trk=api*a3630343*s3700873*   |
+| Grace Alegre                   | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=20589902&authType=name&authToken=9Nnl&trk=api*a3630343*s3700873*  |
+| Tonya Amankwatia               | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=2955984&authType=name&authToken=lmoy&trk=api*a3630343*s3700873*   |
+| Kevin Marshall                 | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=2736280&authType=name&authToken=_iLZ&trk=api*a3630343*s3700873*   |
+| Sean Kirnan                    | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=45885806&authType=name&authToken=tcrQ&trk=api*a3630343*s3700873*  |
+| Joseph Bucci                   | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=1829542&authType=name&authToken=smiX&trk=api*a3630343*s3700873*   |
+| Mike LaFortune                 | Melbourne, Florida Area         | https://www.linkedin.com/profile/view?id=16845373&authType=name&authToken=YRWA&trk=api*a3630343*s3700873*  |
+| Jeffrey Jarnot                 | Greater Detroit Area            | https://www.linkedin.com/profile/view?id=22042118&authType=name&authToken=96jv&trk=api*a3630343*s3700873*  |
+| Reneldo Randall                | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=9260287&authType=name&authToken=ZkEZ&trk=api*a3630343*s3700873*   |
+| Tracy Gregorio                 | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=14589995&authType=name&authToken=T-TV&trk=api*a3630343*s3700873*  |
+| Victoria Walker                | Lafayette, Indiana Area         | https://www.linkedin.com/profile/view?id=14525804&authType=name&authToken=UEEk&trk=api*a3630343*s3700873*  |
+| Jared Beasley                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=190385782&authType=name&authToken=GRT2&trk=api*a3630343*s3700873* |
+| Michael Hartsfield             | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=23419264&authType=name&authToken=6KyS&trk=api*a3630343*s3700873*  |
+| Peggy Southerland              | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=5700288&authType=name&authToken=ZGgj&trk=api*a3630343*s3700873*   |
+| Leigh Anne Giblin              | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=16294564&authType=name&authToken=szDk&trk=api*a3630343*s3700873*  |
+| Patricia Mercier               | Greenville, South Carolina Area | https://www.linkedin.com/profile/view?id=26364816&authType=name&authToken=GXof&trk=api*a3630343*s3700873*  |
+| Patrick Wright                 | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=355649830&authType=name&authToken=97RE&trk=api*a3630343*s3700873* |
+| Jeff Teo                       | Asheville, North Carolina Area  | https://www.linkedin.com/profile/view?id=11917702&authType=name&authToken=eYEw&trk=api*a3630343*s3700873*  |
+| Stuart Anderson                | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=22492072&authType=name&authToken=_TzT&trk=api*a3630343*s3700873*  |
+| Coy Wood                       | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=117337545&authType=name&authToken=YZZK&trk=api*a3630343*s3700873* |
+| Stephen Watkins, MS, CISSP     | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=30856296&authType=name&authToken=cs9j&trk=api*a3630343*s3700873*  |
+| Virginia Zillges               | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=327153398&authType=name&authToken=nR5c&trk=api*a3630343*s3700873* |
+| Joe Dobrota, Jr.               | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=8793974&authType=name&authToken=m2rR&trk=api*a3630343*s3700873*   |
+| Joel Ladd                      | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=220997&authType=name&authToken=gYHY&trk=api*a3630343*s3700873*    |
+| Mark L. Stevenson              | Greater Detroit Area            | https://www.linkedin.com/profile/view?id=11704696&authType=name&authToken=7wW9&trk=api*a3630343*s3700873*  |
+| Lena Maslennikova, DSL, MBA    | Greenville, South Carolina Area | https://www.linkedin.com/profile/view?id=14533743&authType=name&authToken=zT6B&trk=api*a3630343*s3700873*  |
+| Kyle Graham                    | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=11631365&authType=name&authToken=QbCI&trk=api*a3630343*s3700873*  |
+| Jamie Brennan                  | Greater Boston Area             | https://www.linkedin.com/profile/view?id=254019159&authType=name&authToken=M-jO&trk=api*a3630343*s3700873* |
+| Michael Weiner                 | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=28745837&authType=name&authToken=a8DI&trk=api*a3630343*s3700873*  |
+| Kenyetta Fauntleroy            | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=44347243&authType=name&authToken=_qZj&trk=api*a3630343*s3700873*  |
+| Shannon N. Buckines, MBA       | Greater Detroit Area            | https://www.linkedin.com/profile/view?id=5033511&authType=name&authToken=Jq_m&trk=api*a3630343*s3700873*   |
+| Joetta Kilby                   | Washington D.C. Metro Area      | https://www.linkedin.com/profile/view?id=24624940&authType=name&authToken=MfRa&trk=api*a3630343*s3700873*  |
+| Young Choi                     | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=80485454&authType=name&authToken=AIst&trk=api*a3630343*s3700873*  |
+| Sheila Owens                   | Greater Atlanta Area            | https://www.linkedin.com/profile/view?id=197445643&authType=name&authToken=KFZd&trk=api*a3630343*s3700873* |
+| Chris Bashlor                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=63210764&authType=name&authToken=E0W1&trk=api*a3630343*s3700873*  |
+| Kevin Vaughn                   | Lubbock, Texas Area             | https://www.linkedin.com/profile/view?id=88920430&authType=name&authToken=EpEn&trk=api*a3630343*s3700873*  |
+| Donnie Staggs                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=235040274&authType=name&authToken=TU1Z&trk=api*a3630343*s3700873* |
+| Leteria Scott, M.Ed.           | Greater New York City Area      | https://www.linkedin.com/profile/view?id=205561139&authType=name&authToken=D2m1&trk=api*a3630343*s3700873* |
+| Shawn Tiedemann                | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=27448494&authType=name&authToken=aBav&trk=api*a3630343*s3700873*  |
+| Mat Kelly                      | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=2887039&authType=name&authToken=sN1u&trk=api*a3630343*s3700873*   |
+| Dr. John C. Munday             | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=13605620&authType=name&authToken=z679&trk=api*a3630343*s3700873*  |
+| Chelsea Kelley                 | Greater Atlanta Area            | https://www.linkedin.com/profile/view?id=5551240&authType=name&authToken=qHeE&trk=api*a3630343*s3700873*   |
+| Pamela Lee                     | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=300456803&authType=name&authToken=34uB&trk=api*a3630343*s3700873* |
+| Holly Slocum                   | Cleveland/Akron, Ohio Area      | https://www.linkedin.com/profile/view?id=28570656&authType=name&authToken=nLuB&trk=api*a3630343*s3700873*  |
+| Daniel Reyna                   | Cologne Area, Germany           | https://www.linkedin.com/profile/view?id=130131200&authType=name&authToken=F4HP&trk=api*a3630343*s3700873* |
+| Jeff Brechtelsbauer            | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=44789408&authType=name&authToken=8SwK&trk=api*a3630343*s3700873*  |
+| Alberta A. Ayee, Ph.D.         | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=99430518&authType=name&authToken=0DxX&trk=api*a3630343*s3700873*  |
+| Adam Woods                     | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=48071669&authType=name&authToken=vxeX&trk=api*a3630343*s3700873*  |
+| Michele LaCorte                | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=109540297&authType=name&authToken=_yAf&trk=api*a3630343*s3700873* |
+| Keith Alston                   | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=23217840&authType=name&authToken=H7GP&trk=api*a3630343*s3700873*  |
+| Kalyn Mace-Guilloux            | Washington D.C. Metro Area      | https://www.linkedin.com/profile/view?id=115789087&authType=name&authToken=JjTH&trk=api*a3630343*s3700873* |
+| Lisa Martin                    | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=68549417&authType=name&authToken=yklK&trk=api*a3630343*s3700873*  |
+| Cora Flottman                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=320177277&authType=name&authToken=9mLD&trk=api*a3630343*s3700873* |
+| Charles Elks                   | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=52252570&authType=name&authToken=AZSw&trk=api*a3630343*s3700873*  |
+| Robert Essler                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=330389084&authType=name&authToken=e2gM&trk=api*a3630343*s3700873* |
+| Lydia Wade                     | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=389195298&authType=name&authToken=ahfU&trk=api*a3630343*s3700873* |
+| Whitney McDaniel               | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=375016829&authType=name&authToken=Cf3Y&trk=api*a3630343*s3700873* |
+| Jessica Totty                  | Norfolk, Virginia Area          | https://www.linkedin.com/profile/view?id=16849372&authType=name&authToken=FjYG&trk=api*a3630343*s3700873*  |
++--------------------------------+---------------------------------+------------------------------------------------------------------------------------------------------------+

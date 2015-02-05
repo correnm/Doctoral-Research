@@ -1,0 +1,132 @@
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> ================================ RESTART ================================
+>>> 
+Searching LinkedIn for: Jessica Totty using search string "Jessica Totty" AND linkedin
+
+
+Searching LinkedIn for: Chelsea Kelley using search string "Chelsea Kelley" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Chelsea+Kelley%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Joe Dobrota using search string "Joe Dobrota" AND linkedin
+Joe Dobrota, Sr. | LinkedIn
+Greater Denver Area - Partner at NGTO Group
+http://www.linkedin.com/in/joemdobrota
+Not an affiliate of Regent University
+
+
+
+Searching LinkedIn for: Mark L. Stevenson using search string "Mark L. Stevenson" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Mark+L.+Stevenson%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Victoria Walker using search string "Victoria Walker" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Victoria+Walker%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Grace Alegre using search string "Grace Alegre" AND linkedin
+
+
+
+Searching LinkedIn for: Lena Maslennikova using search string "Lena Maslennikova" AND linkedin
+Lena Maslennikova, DSL, MBA | LinkedIn
+Tigerville, South Carolina - Dean of CAPS; Director of e-Learning Center; Instructional Designer/Trainer; Certified QM Master Reviewer & Facilitator
+http://www.linkedin.com/pub/lena-maslennikova-dsl-mba/4/a4a/893
+Education: Regent University
+
+
+
+Searching LinkedIn for: Sean Kirnan using search string "Sean Kirnan" AND linkedin
+
+
+Searching LinkedIn for: Kita Graham using search string "Kita Graham" AND linkedin
+
+
+
+Searching LinkedIn for: Donnie Staggs using search string "Donnie Staggs" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Donnie+Staggs%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Jamie Brennan using search string "Jamie Brennan" AND linkedin
+Jamie Brennan | LinkedIn
+Greater Chicago Area - Principal at Brennan Search LLC
+https://www.linkedin.com/in/jamiesbrennan
+Not an affiliate of Regent University
+
+
+Jamie Brennan - Canada | LinkedIn
+Guelph, Ontario, Canada - Logistic Coordinator at Anchor Edbar Machining
+http://ca.linkedin.com/pub/jamie-brennan/5b/608/3a2
+Not an affiliate of Regent University
+
+
+Jamie Brennan - United Kingdom | LinkedIn
+Belfast, United Kingdom - Web Developer at Walker Communications Ltd
+http://uk.linkedin.com/in/jamiebrennan88
+Not an affiliate of Regent University
+
+
+
+
+
+Searching LinkedIn for: Pamela Lee using search string "Pamela Lee" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Pamela+Lee%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Nathaniel Richner using search string "Nathaniel Richner" AND linkedin
+Nathaniel Richner | LinkedIn
+Norfolk, Virginia Area - --
+http://www.linkedin.com/pub/nathaniel-richner/2b/483/a81
+Education: Regent University
+
+
+
+Searching LinkedIn for: Joshua Mitchell using search string "Joshua Mitchell" AND linkedin
+
+
+
+
+Joshua Mitchell - Canada | LinkedIn
+Toronto, Canada Area - Business Intelligence Manager at PMA Canada
+http://ca.linkedin.com/in/joshuaemmanualmitchell
+Not an affiliate of Regent University
+
+
+Joshua Mitchell - Australia | LinkedIn
+Brisbane, Australia - Client Manager at 1recruit International
+http://au.linkedin.com/pub/joshua-mitchell/42/b74/59
+Not an affiliate of Regent University
+
+
+Dr. Joshua Mitchell | LinkedIn
+Greater Los Angeles Area - Sports Medicine: High School, College and Pro
+https://www.linkedin.com/pub/dr-joshua-mitchell/30/320/40a
+Not an affiliate of Regent University
+
+
+Searching LinkedIn for: Jacob Affinito using search string "Jacob Affinito" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Jacob+Affinito%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Augusta Hayward using search string "Augusta Hayward" AND linkedin
+Search failed: Failed getting http://www.google.com/search?hl=en&q=%22Augusta+Hayward%22+AND+linkedin&btnG=Google+Search: HTTP Error 503: Service Unavailable
+Searching LinkedIn for: Chad Clukey using search string "Chad Clukey" AND linkedin
+Chad Clukey | LinkedIn
+Norfolk, Virginia Area - Courier at FedEx Express
+https://www.linkedin.com/pub/chad-clukey/16/8b4/a16
+Education: Regent University
+
+
+
+Searching LinkedIn for: Mike Ackerman using search string "Mike Ackerman" AND linkedin
+Mike Ackerman | LinkedIn
+Chicago, Illinois - Creative Director at DDB
+https://www.linkedin.com/pub/mike-ackerman/8/405/195
+Not an affiliate of Regent University
+
+
+
+Mike Ackerman - Canada | LinkedIn
+Toronto, Canada Area - Actor, Producer, Assistant Director, Teacher and Performance Artist
+http://ca.linkedin.com/pub/mike-ackerman/25/25a/bba
+Not an affiliate of Regent University
+
+
+Searching LinkedIn for: Bohdan Smaha using search string "Bohdan Smaha" AND linkedin
+Bohdan Smaha, MBA | LinkedIn
+Norfolk, Virginia Area - Web Design, Usability & GUI, Creative Director, SEO, Social Media, Marketing, Start Ups, Business Development
+http://www.linkedin.com/in/bohdan
+Education: Regent University
+
+
+
+>>> 
