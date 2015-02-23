@@ -1,0 +1,17 @@
+//3rd Degree: Bohdan Smaha & Regent
+MATCH (p:People)-[:KNOWN_AS]->(n:PeopleNames),(p:People)-[:LINKED_IN]->(l:Linkedin),(l:Linkedin)-[:ATTENDED]->(a:Linkedin_Affiliation), (l:Linkedin)-[:FIRST_DEGREE]->(v:Linkedin_PAV), (v:Linkedin_PAV)-[:SECOND_DEGREE]->(v2:Linkedin_PAV), (v2:Linkedin_PAV)-[:THIRD_DEGREE]->(v3:Linkedin_PAV) where p.first_name='Bohdan' and p.last_name='Smaha' and lower(a.affiliation_name) = 'regent university' return l,n,a, p,v,v2,v3 LIMIT 500;
+
+//3rd Degree: Mark Stevenson & Regent
+MATCH (p:People)-[:KNOWN_AS]->(n:PeopleNames),(p:People)-[:LINKED_IN]->(l:Linkedin),(l:Linkedin)-[:ATTENDED]->(a:Linkedin_Affiliation), (l:Linkedin)-[:FIRST_DEGREE]->(v:Linkedin_PAV), (v:Linkedin_PAV)-[:SECOND_DEGREE]->(v2:Linkedin_PAV), (v2:Linkedin_PAV)-[:THIRD_DEGREE]->(v3:Linkedin_PAV) where p.first_name='Mark' and p.last_name='Stevenson' and lower(a.affiliation_name) = 'regent university' return l,n,a, p,v,v2,v3 LIMIT 500;
+
+//2nd Degree: Mark Stevenson 
+MATCH (p:People)-[:KNOWN_AS]->(n:PeopleNames),(p:People)-[:LINKED_IN]->(l:Linkedin),(l:Linkedin)-[:FIRST_DEGREE]->(v:Linkedin_PAV), (v:Linkedin_PAV)-[:SECOND_DEGREE]->(v2:Linkedin_PAV) where p.first_name='Mark' and p.last_name='Stevenson' return l,n,p,v,v2 LIMIT 200;
+
+//3rd Degree: Mark Stevenson 
+MATCH (p:People)-[:KNOWN_AS]->(n:PeopleNames),(p:People)-[:LINKED_IN]->(l:Linkedin),(l:Linkedin)-[:FIRST_DEGREE]->(v:Linkedin_PAV), (v:Linkedin_PAV)-[:SECOND_DEGREE]->(v2:Linkedin_PAV), (v2:Linkedin_PAV)-[:THIRD_DEGREE]->(v3:Linkedin_PAV) where p.first_name='Mark' and p.last_name='Stevenson' return l,n,p,v,v2,v3 LIMIT 700;
+
+
+// 1st Degree: Mark Stevenson
+MATCH (p:People)-[:KNOWN_AS]->(n:PeopleNames),(p:People)-[:LINKED_IN]->(l:Linkedin),(l:Linkedin)-[:ALSO_VIEWED]->(v:Linkedin_PAV) where p.first_name='Mark' and p.last_name='Stevenson' and v.degree='1' return l,n,p,v LIMIT 500;
+
+
