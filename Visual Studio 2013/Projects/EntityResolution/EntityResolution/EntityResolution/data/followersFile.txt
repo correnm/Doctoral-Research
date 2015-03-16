@@ -1,0 +1,26 @@
+ID,NAME,FOLLOWER.USERNAME,FOLLOWER.DESCRIPTION,FOLLOWER.LOCATION
+1,PatentFilingIndia.in,PatFilingIndia,#IPR Consultants with focus on #Patents, #Designs, #Trademarks, and #Copyrights services. We help you identify, create, protect and commercialize #inventions.,Delhi NCR
+2,Crittenton Hospital,GetCrittenton,Crittenton Hospital Medical Center is dedicated to enhancing the health of the individuals & communities we serve. Our team is passionate about CARING.,Rochester, Michigan
+3,Karla Perry,answerbearer,Writer, author, and worldview revitalizer. Published in the MorningStar E-Journal and by the Oak Initiative. Author of ebook: Back To The Future,Virginia Beach
+4,Rights First,RightsFirstLaw,Rights First Law, P.C. is a law firm committed to putting your rights first.  Look for valuable info about your rights @RightsFirstLaw and protect your rights.,Michigan-California-Florida
+5,Financial Fitness!,FinancialShow,Join us each week on the Financial Fitness Show where we are Turning Mind Power into Money - hosted by best-selling author Chip Cummings!,Hotline - (888) 696-7747
+6,HowToFascinate,HowToFascinate,You can fascinate— our research proves it. @SallyHogshead will teach you how to fascinate with your natural advantage. http://t.co/GbzA77zx8l.,Orlando, FL
+7,Kelsey Humphreys,KelseyHumphreys,Host of entrepreneurship talk show, The Pursuit. Wife, Mom, Speaker, Author, @Entrepreneur contributor, Consultant. inspire & equip: http://t.co/oXfKnG46Ps,OKC | BNA | LAX 
+8,Sindy Adam,qopatelisr,wine curiosity, social traveler, mommy,Oakland, CA
+9,Montina Portis,montinaportis,Helping lawyers and law firms attract more clients, gain more referrals and build marketing machines - guaranteed! Featured on Fox News, NBC, CBS, ABC.,Atlanta, GA
+10,Advanced IP Law Firm,aipbdcom,Suite No # 702 (6th Floor), Sultan Ahmed Plazza, 32 Purana Paltan, Dhaka,Bangladesh,  Cell: +88-01672322755,info@aipbd.com
+11,Avidity IP,AvidityIP,European Patent & Trade Mark Attorneys,UK
+12,James D. Rush ,rushlawoffices,Specializing in personal injury, employment discrimination, wrongful termination, unpaid wages & workers comp. Please Like us @ http://t.co/E0w4VqzGQc,San Francisco Bay Area 
+13,Richard P. Beem,BeemPatentLaw,Chicago patent attorney, Iowa State, U. Houston, Federal Circuit clerk, engineer, wrestler, dancer, mentor, friend,Chicago Illinois 60604 USA
+14,Juanita Clarke,zingatude,Live your life with ZINGATUDE!,Ottawa ON Canada 
+15,Paul Barron,RethinkGen,A video series on rethinking business in todays world, by publisher & producer @paulbarron.  Publisher, producer, speaker and author,Miami FL
+16,Maisha Guy,kingskidgotnow,Helping brands discover their true identity | Breaking rules and building trends | Plus size advocate | Prophetic Kingdom Advisor | info@workwithmaisha.com,International 
+17,Anastasiya Day,AnastasiyaDay,Life Lover. I'm a digital influencer. Passionate about helping people with their social media, biz & charity events. Empowering people & businesses.,London
+18,Sandi Krakowski,sandikrakowski,Author of the #BEMORE book & movement, Believer in BIG dreams, Top 20 @Forbes Influencer, @EntMagazine columnist. Empowering counter culture leaders to RISE UP!,Kansas City
+19,Chad Hymas,chadlhymas,Changing lives one day at a time! PASSION. INSPIRE. RESULTS! I am a speaker, author, quadriplegic, husband and father of 4!,Salt Lake City, Utah
+20,CelkaMcEachern,CelkaMcEachern,Don't get mad when it seems like they care too much, start worrying when it seems like they don't care at all.,Rosamond,Illinois
+21,ipdotcom,ipdotcom,http://t.co/FuyHONyo9b helps organizations assess the value of their intellectual property and turn innovative ideas into revenue.,
+22,LaunchSnap,LaunchSnap,LaunchSnap is a comprehensive design solution that gives you agency-quality in a fraction of the time and cost involved in creating a custom set of materials.,San Francisco
+23,Stephen Preston Law,qualityiplaw,Full service intellectual property law firm with a focus on electrical arts,Murray, Utah
+24,Viper_IP,Viper_IP,The Intellectual Property Market Place : On-line IP Auctions. VIPER IP is an open channel for buying, selling and licensing IP. The first in Europe.,London
+25,Legal Fee Financing,legalfinancing1,Legal Fee Financing is a strategic alliance offering lawyers a way to take advantage of cutting-edge financing options to offer potential clients.,Dallas
