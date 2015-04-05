@@ -1,5 +1,5 @@
 '''
-@Author Corren McCoy, 2014
+@Author Corren McCoy, 2015
 @Purpose Entity Resolution of known community with online social network
 '''
 
@@ -12,9 +12,12 @@ from ConfigParser import SafeConfigParser
 from collections import defaultdict
 import mainMenu
 
+
+import codecs
 import collections
 import csv
 import json
+import logging
 import os
 import pprint
 import random
@@ -26,8 +29,21 @@ import urllib
 import MySQLdb
 import requests
 import mechanize
+import time
+import tweepy
+import urllib
+import urllib2
+import urllib3.contrib.pyopenssl
+urllib3.contrib.pyopenssl.inject_into_urllib3()
 import xmltodict
 
+
+logging.basicConfig(
+        filename='./EntityResolution/logs/access-log', 
+        filemode='a',
+        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+        datefmt='%H:%M:%S',
+        level=logging.DEBUG)
 
 def description():
   """
@@ -49,6 +65,18 @@ dataset = defaultdict(list)
 linkedin_affiliation = defaultdict(list)
 linkedin_pav = defaultdict(list)
 
+#### TWITTER
+# variables used to manage the API rate limit
+FIFTEEN_MIN=900 # seconds
+FIVE_MIN=300
+ITEM_LIMIT=1000
+
+# Initialize the oAuth authentication settings
+# Documentation: https://dev.twitter.com/docs/auth/oauth
+CONSUMER_KEY = "LrA1DdH1QJ5cfS8gGaWp0A"
+CONSUMER_SECRET = "9AX14EQBLjRjJM4ZHt2kNf0I4G77sKsYX1bEXQCW8"
+OAUTH_TOKEN = "1862092890-FrKbhD7ngeJtTZFZwf2SMjOPwgsCToq2A451iWi"
+OAUTH_SECRET = "AdMQmyfaxollI596G82FBipfSMhagv6hjlNKoLYjeg8"
 
 # default affiliation
 affiliation='Regent University'
@@ -245,7 +273,7 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
     maxResults=100
     
     # search for each person's public profile on LinkedIn using primary key
-        # Query for the list of people we want to find in the (T)raining set
+    # Query for the list of people we want to find in the (T)raining set
     cursor.execute('''SELECT dataset_pk, first_name, last_name, alt_name_pk FROM people_alt_names where dataset_pk = %s ''', dataset_pk)
     all_rows = cursor.fetchall()
     for row in all_rows:
@@ -313,7 +341,7 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
 
               # Build a service object for interacting with the API. Visit
               # the Google APIs Console <http://code.google.com/apis/console>
-              # to get an API key for your own application.
+              # to get an API key for your own application. This is the one for LinkedIn
               service = build("customsearch", "v1",
               developerKey="AIzaSyDyvnRIwlTLNA_HNKqHmpvpitSaDNfFJbU")
 
@@ -341,22 +369,40 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
                       resultFullname = res.get('pagemap',{}).get('hcard')[0].get('fn')
                       print "Full name", resultFullname
                       url = res.get('link')
-                      print "URL", url
+                      print "original URL", url
+                      #Is the URL an alias or redirect to another page?
+                      final_url=finalURL(url)
+                      print "resolved URL", final_url
                       location = res.get('pagemap',{}).get('person')[0].get('location')
                       print "Location", location
                       
-                      # add each result to the table
-                      query="insert into linkedin (title, location, url_pub, full_name, search_engine, alt_name_pk) values (%s, %s, %s, %s, %s, %s)"
-                      cursor.execute(query,(title, location, url, resultFullname, searchEngine, alt_name_pk))
-
-                      linkedin_pk = cursor.lastrowid
-                      query="insert into linkedin_candidates (dataset_pk, linkedin_pk, position_no) values (%s, %s, %s)"
-                      cursor.execute(query,(pk, linkedin_pk, position))
-                      conn.commit()
-
+                      # does this profile already exist in the table?
+                      query="select linkedin_pk from linkedin where url_pub = %s"
+                      cursor.execute(query,(final_url))
+                      row = cursor.fetchone()
+                      if row is not None:
+                          linkedin_pk =row[0]
+                      else:
+                          # Existing record not found. So we create a new one
+                          # add each result to the table
+                          query="insert into linkedin (title, location, url_pub, full_name, search_engine, alt_name_pk) values (%s, %s, %s, %s, %s, %s)"
+                          cursor.execute(query,(title, location, final_url, resultFullname, searchEngine, alt_name_pk))
+                          linkedin_pk = cursor.lastrowid
+                          conn.commit()
+                      print "linkedin_pk %s " % linkedin_pk 
+                      print "pk %s" % pk 
+                      print "position %s" % position
+                      query="insert ignore into linkedin_candidates (dataset_pk, linkedin_pk, position_no) values (%s, %s, %s)"
+                      print query
+                      try:
+                        cursor.execute(query,(pk, linkedin_pk, position))
+                        conn.commit()
+                      except MySQLdb.Error, e:
+                        print "MySQL Error %s" %e
                   nextPage=response.get('queries').get('nextPage')[0].get('startIndex')
                   startPage = nextPage
-                  print "next", nextPage
+                  if nextPage:
+                    print "next", nextPage
               
                   response = service.cse().list(
                   q=searchString,
@@ -367,13 +413,13 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
 
               # Catch the Google exception
               except SearchError, e:
-                 print "Search failed: %s" % e              
+                 print "(1) Search failed: %s" % e              
               except Exception, e:
-                 print "Google Custom Search failed: %s" % e
+                 print "(1) Google Custom Search failed: %s" % e
         except SearchError, e:
-            print "Search failed: %s" % e              
+            print "(2) Search failed: %s" % e              
         except Exception, e:
-            print "Google Custom Search failed: %s" % e
+            print "(2) Google Custom Search failed: %s" % e
 
     # Close the mySQL connection normally
     #if conn.open:
@@ -631,33 +677,76 @@ def linkedInAffiliation(dataset_pk=None):
       print e
  
 
+def finalURL (url=None, verbose=None):
+    finalurl= url
+    if not url:
+        pass
+        #url='https://www.linkedin.com/in/bohdan'
+        #url='http://www.linkedin.com/pub/bohdan-smaha-mba/4/a01/a2'
+    else:
+        request=urllib2.Request(url)
+        # Understanding the user agent string (http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx)
+        randomUserAgent=random.choice(BROWSERS)
+        #print randomUserAgent
+        request.add_header('User-agent', randomUserAgent)
+        response=urllib2.urlopen(request)
+        if response == 200:
+            finalurl=response.geturl()
+        else:
+            finalurl=url
+        if verbose:
+            print "RESPONSE" , response.code
+            print "START-URL", url
+            print "FINAL-URL",finalurl
+
+            headers=response.info()
+            print "DATE:", headers['date']
+            print "HEADERS"
+            print " -------------"
+            print headers
+
+    return finalurl
 
 def peopleAlsoViewed(dataset_pk, degree):
-
+    print "--->degree","PK", degree, dataset_pk
     try:
         # For first degree, get the "people also viewed" from the original profile page
         if degree == 1:
-            cursor.execute('''SELECT l.linkedin_pk, l.url_pub, null 
+            cursor.execute('''SELECT l.linkedin_pk, l.url_pub, 0 
             FROM linkedin l,
             linkedin_candidates d
             where l.linkedin_pk = d.linkedin_pk
             and d.dataset_pk = %s ''' , (dataset_pk,))
         elif degree == 2:
-            cursor.execute('''SELECT l.linkedin_pk, l.url_pub, p.pav_pk 
+            cursor.execute('''SELECT p.linkedin_pk, l.url_pub, p.pav_pk 
             FROM linkedin_pav p, 
-            linkedin l,
-            linkedin_candidates d 
-            where p.linkedin_pk = l.linkedin_pk 
-            and l.linkedin_pk = d.linkedin_pk
-            and d.dataset_pk = %s and degree = 1 ''', (dataset_pk,))
+            linkedin l 
+            where p.pav_pk = l.linkedin_pk 
+            and degree = 1
+            and p.linkedin_pk in
+            (
+            select l.linkedin_pk
+            from linkedin l,
+            linkedin_candidates c
+            where c.linkedin_pk = l.linkedin_pk
+            and c.dataset_pk=%s
+            )
+             ''', (dataset_pk,))
         elif degree == 3:
-             cursor.execute('''SELECT l.linkedin_pk, l.url_pub, p.pav_pk 
+            cursor.execute('''SELECT p.linkedin_pk, l.url_pub, p.pav_pk 
             FROM linkedin_pav p, 
-            linkedin l,
-            linkedin_candidates d 
-            where p.linkedin_pk = l.linkedin_pk 
-            and l.linkedin_pk = d.linkedin_pk
-            and d.dataset_pk = %s and degree = 2 ''', (dataset_pk,))
+            linkedin l 
+            where p.pav_pk = l.linkedin_pk 
+            and degree = 2
+            and p.linkedin_pk in
+            (
+            select l.linkedin_pk
+            from linkedin l,
+            linkedin_candidates c
+            where c.linkedin_pk = l.linkedin_pk
+            and c.dataset_pk=%s
+            )
+             ''', (dataset_pk,))
         else:
             raise ValueError('Degree can only be set to 1, 2, or 3')
         
@@ -672,13 +761,13 @@ def peopleAlsoViewed(dataset_pk, degree):
           linkedin_pav[row[0]].append(row[1].lower())
           pk = row[0]
           value = row[1].lower()
-          pav_pk = row[2]
+          parent_pav_pk = row[2]
           # search for each person's public profile on LinkedIn
           #for pk, value in linkedin_pav.items():
           url = str(value).strip('[]')
           url = url.strip('\'"')
           url = url.encode("utf-8")
-          print pk, url, pav_pk 
+          print pk, url, parent_pav_pk 
           try:
             if deleteOld:
               # Delete any old records associated with this record in the dataset
@@ -692,16 +781,20 @@ def peopleAlsoViewed(dataset_pk, degree):
               deleteOld = False
             
             #package the request
-            #url=url.encode('utf8')
-            request=urllib2.Request(url)
+            url=url.encode('utf8')
+            #request=requests.Request(url)
             # Understanding the user agent string (http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx)
             randomUserAgent=random.choice(BROWSERS)
             #print randomUserAgent
-            request.add_header('User-agent', randomUserAgent)
-            response=urllib2.urlopen(request)
-            print "response" , response.code
-            if response.code == 200:
-                html=response.read()
+            #request.add_header('User-agent', randomUserAgent)
+            headers=dict()
+            headers['User-Agent'] = randomUserAgent
+            #print headers
+            response=requests.get(url, headers=headers)
+            print "response" , response.status_code
+            if response.status_code == 200:
+                #html=response.read()
+                html=response.text
                 # decode byte stream to unicode
                 html = html.decode("utf-8")
                 # encode to ASCII byte stream, removing characters with codes >127
@@ -712,14 +805,17 @@ def peopleAlsoViewed(dataset_pk, degree):
                 peopleAlsoViewed= soup.html.body.find('div',{'class' : 'insights-browse-map'})
                 #print peopleAlsoViewed
                 if peopleAlsoViewed:
+                    position = 0
                     for temp in peopleAlsoViewed.findAll('li'):
+                      position = position + 1
                       photo = temp.find('img', {'class' : ''})['src']
                       print "Photo: ", photo
                       h4 = temp.find('h4')
                       temp_url = h4.find('a')
                       #print "temp:", temp_url
                       url = temp_url['href'].strip('?trk=pub-pbmap')
-                      print "URL: ", url
+                      final_url=finalURL(url)
+                      print "URL: ", url, final_url
                       fullname =temp_url.contents[0]
                       print "Full name", fullname
                       profileTitle = temp.find('p',{'class': 'browse-map-title'}).string
@@ -727,19 +823,19 @@ def peopleAlsoViewed(dataset_pk, degree):
                       try:
                         # Have we already seen this profile?
                         query='''select linkedin_pk from linkedin where url_pub = %s'''
-                        cursor.execute(query, (url,))
-                        link_row= cursor.fetchone()
-                        if link_row:
-                            pk = link_row[0]
+                        cursor.execute(query, (final_url))
+                        row = cursor.fetchone()
+                        if row is not None:
+                            pav_pk = row[0]
                         else:
                             # New one. Add to table. Save the key
                             query="insert into linkedin (url_pub, full_name, title, profile_image_url) values (%s, %s, %s, %s)"
-                            cursor.execute(query,(url, fullname, profileTitle, photo,))
-                            pk = cursor.rowid
-
+                            cursor.execute(query,(final_url, fullname, profileTitle, photo,))
+                            pav_pk = cursor.lastrowid
+                            conn.commit()
                         
-                            query="insert into linkedin_pav (linkedin_pk, url, full_name, title, degree, parent_pav_pk) values (%s, %s, %s, %s, %s, %s)"
-                        cursor.execute(query,(pk, url, fullname, profileTitle, degree, pav_pk,))
+                        query="insert into linkedin_pav (linkedin_pk, pav_pk, degree, parent_pav_pk, position_no) values (%s, %s, %s, %s,%s)"
+                        cursor.execute(query,(pk, pav_pk, degree, parent_pav_pk, position))
                         conn.commit()
                       except Exception as e:
                         print "Error while inserting linkedin_pav", e
@@ -752,16 +848,15 @@ def peopleAlsoViewed(dataset_pk, degree):
       print e
     except Exception as e:
       print e
-    # Close the mySQL connection normally
-    if conn.open:
-        closeConnection()
-
+ 
 
 # Load nicknames from csv file compiled by Carlton Northern
 # http://code.google.com/p/nickname-and-diminutive-names-lookup/
 def loadNickNames(filename=None):
 #    openConnection()
 #    cursor = conn.cursor()
+    logger = logging.getLogger(__name__)
+    logging.info('loadNickNames')
 
     # Delete any old records in the database tables (master - detail)
     query = "delete from given_names"
@@ -811,11 +906,459 @@ def loadNickNames(filename=None):
     cursor.close()
 #    closeConnection()
 
-def searchTwitterUsers(dataset_pk=None):
-    x = 1
-      
-   
+def searchTwitterUsers(dataset_pk, delete=True, startPage=1):
+
+    if dataset_pk:
+        # search for each person's public profile on LinkedIn using primary key
+        # Query for the list of people we want to find in the (T)raining set
+        cursor.execute('''SELECT dataset_pk, first_name, last_name, alt_name_pk FROM people_alt_names where dataset_pk = %s ''', dataset_pk)
+        all_rows = cursor.fetchall()
+        for row in all_rows:
+            # initialize query parameters for Twitter API
+            pk = row[0]
+            first = None
+            last = None
+            fullname = None
+            alt_name_pk = None
+
+            try:
+                if delete:
+                    # Delete any old records associated with this record in the dataset
+                    query = "delete from twitter_candidates where dataset_pk = %s"
+                    # execute the query
+                    cursor.execute(query, (pk,))
+                    print "Twitter Candidate Rows deleted:", cursor.rowcount
+                    delete=False
+
+                    # accept the change
+                    conn.commit()
+            # Catch the database exception
+            except Exception as e:
+                print "Database exception", e
+
+            first = row[1]
+            last = row[2]
+            fullname = blank.join([first, last])
+            alt_name_pk =  row[3]  
+            # format Google search parameters for Twitter     
+            searchName = termsep.join([first, last]).encode("utf-8")
+            twitterName = '"' + fullname.encode("utf-8") + '"'
+
+            query="allintitle:" + searchName
+            print "Google Custom Search for Twitter: ", searchName
+
+            try:
+                # try to space our calls so we look like a human user
+                randomWait()
+                # Open the Google custom search URL
+                # Use my CSE ID for the cx parameter
+         
+                url = "http://www.google.com/cse/api/013993674550209950690/cse/hav5cnkqrzk0&hl=%(lang)s&q=allintitle:%(query)s"
+    
+                # Build a service object for interacting with the API. Visit
+                # the Google APIs Console <http://code.google.com/apis/console>
+                # to get an API key for your own application. Use the ID for Twitter
+                service = build("customsearch", "v1", developerKey="AIzaSyDyvnRIwlTLNA_HNKqHmpvpitSaDNfFJbU")
+
+                # Return only a partial list of fields from the response
+                try:
+                    response = service.cse().list(
+                    q=query,
+                    cx="013993674550209950690:hav5cnkqrzk",
+                    start=startPage
+                    ).execute()
+
+                    if (response != None): 
+                        totalResults = response.get('queries').get('request')[0].get('totalResults',0)
+                        print "About", totalResults, "Twitter Results"
+                        if totalResults > 0:
+                            getTwitterUsers(dataset_pk, twitterName, totalResults, alt_name_pk)
+                        else:
+                            totalResults = 0
+
+                # Catch the Google exception
+                except SearchError, e:
+                    print "(1) Twitter Search failed: %s" % e              
+                except Exception, e:
+                    print "(1) Google Custom Search for Twitter failed: %s" % e
+            except SearchError, e:
+                print "(2) Twitter Search failed: %s" % e              
+            except Exception, e:
+                print "(2) Google Custom Search for Twitter failed: %s" % e
+
+def searchTwitterVanity(dataset_pk, delete=False):
+    try:
+        if dataset_pk:
+            # search for each person's public profile on Twitter using the screen name derived from Linkedin Vanity URL
+            query= '''select c.dataset_pk, l.screen_name from linkedin_candidates c, linkedin l where screen_name is not null and c.linkedin_pk = l.linkedin_pk and c.dataset_pk = %s '''
+            print query
+            cursor.execute(query,(int(dataset_pk)))
+            all_rows = cursor.fetchall()
+            for row in all_rows:
+                # initialize query parameters for Twitter API
+                pk = row[0]
+                screen_name = row[1]
+
+                try:
+                    if delete:
+                        # Delete any old records associated with this record in the dataset
+                        query = "delete from twitter_candidates where dataset_pk = %s"
+                        # execute the query
+                        cursor.execute(query, (pk,))
+                        print "Twitter Candidate Rows deleted:", cursor.rowcount
+                        delete=False
+
+                        # accept the change
+                        conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    print "Database exception on delete", e
+
+                twitterName = '"@' + screen_name.encode("utf-8") + '"'
+                print "Twitter screen name is: ", twitterName
+                # Searching Twitter with an actual screen name should only match one row
+                totalResults=1
+                getTwitterUsers(dataset_pk, twitterName, totalResults, None)
+    except Exception as e:
+        print "Database exception on select", e
+
+def searchTwitterFollowers(dataset_pk, delete=False):
+    try:
+        if dataset_pk:
+            # search for the followers
+            query= '''select c.dataset_pk, c.twitter_profile_pk, t.screen_Name, t.follower_count, t.following_count 
+            from twitter_profiles t, twitter_candidates c 
+            where t.twitter_profile_pk = c.twitter_profile_pk 
+            and c.dataset_pk = %s
+             '''
+            #print query
+            cursor.execute(query,(dataset_pk))
+            all_rows = cursor.fetchall()
+            for row in all_rows:
+                # initialize query parameters for Twitter API
+                pk = row[0]
+                twitter_profile_pk = row[1]
+                screen_name = row[2]
+                follower_count = row[3]
+
+                try:
+                    if delete:
+                        # Delete any old records associated with this record in the dataset
+                        query = "delete from twitter_followers where twitter_profile_pk = %s"
+                        # execute the query
+                        cursor.execute(query, (twitter_profile_pk,))
+                        print "Twitter Followers Rows deleted:", cursor.rowcount
+                        delete=False
+
+                        # accept the change
+                        conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    print "Database exception on delete", e
+
+                twitterName = screen_name.encode("utf-8")
+                print "Twitter screen name is: ", twitterName
+                # Searching Twitter with an actual screen name should only match one row
+                totalResults=follower_count
+                if totalResults > 0:
+                    getTwitterFollowers(dataset_pk, twitter_profile_pk, twitterName, totalResults, None)
+    except Exception as e:
+        print "Database exception on select", e
+
+def getTwitterUsers(dataset_pk, username, numItems, alt_name_pk):
+    try:
+        # first set up authenticated API instance
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
+        #create an instance of a tweepy StreamListener to handle the incoming data
+        api = tweepy.API(auth, api_root='/1.1')
+
+        counter = 0
+        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        if (remaining_hits < 3):# or counter % 160 == 0:
+            print '\n' 
+            print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+            time.sleep(FIFTEEN_MIN)
+
+        # Twitter API will only return 1000 items
+        TwitterItems = min(int(ITEM_LIMIT), int(numItems))
+        print "Requested: ", numItems, "Searching Twitter for: ", TwitterItems
+        userItems = tweepy.Cursor(api.search_users, q=username).items(TwitterItems)
+        for user in userItems:
+                counter = counter + 1
+                print user.name.encode("utf-8"), user.screen_name.encode("utf-8"), user.description.encode("utf-8"), user.location, user.url, user.profile_image_url, str(user.protected), user.followers_count, user.friends_count
+                print "\n"
+
+                try:
+                    # does this Twitter profile already exist in the table?
+                    query="select twitter_profile_pk from twitter_profiles where screen_name = %s"
+                    cursor.execute(query,(user.screen_name))
+                    row = cursor.fetchone()
+                    if row is not None:
+                        twitter_profile_pk =row[0]
+                    else:
+                        # Existing record not found. So we create a new one
+                        # Insert the new profile
+                        query = '''insert into twitter_profiles 
+                        (username, screen_name, bio, location, url, 
+                        protected, profile_image_url, follower_count, following_count, alt_name_pk) 
+                        values ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                        # execute the query
+                        cursor.execute(query, (user.name.encode("utf-8"), 
+                                               user.screen_name.encode("utf-8"), 
+                                               user.description.encode("utf-8"), 
+                                               user.location, user.url, 
+                                               str(user.protected), user.profile_image_url, 
+                                               user.followers_count, user.friends_count, alt_name_pk))
+                        # Insert the new candidate
+                        twitter_profile_pk = cursor.lastrowid
+                    # Ignore duplicates if the primary key is already in the table
+                    query = "insert ignore into twitter_candidates(twitter_profile_pk, dataset_pk, position_no) values ( %s, %s, %s)"
+                    # execute the query
+                    cursor.execute(query, (twitter_profile_pk, dataset_pk, counter))
+                
+                    # accept the change
+                    conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    print "Database exception", e
+
+            
+                # Returns the remaining number of API requests available to the requesting user
+                # before the API limit of 180 requests every 15 minutes
+                # Calls to rate_limit_status do not count against the rate limit.
+                remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+           
+                if (remaining_hits < 5):# or counter % 160 == 0:
+                    print '\n' 
+                    print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+                    time.sleep(FIFTEEN_MIN)
+                else:
+                    pass
+                
+        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        print '\n'
+        print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+
+    except tweepy.error.TweepError as e:
+        print e.reason
+
+def getTwitterFollowers(dataset_pk, twitter_profile_pk, username, numItems, alt_name_pk):
+    try:
+        # first set up authenticated API instance
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
+        #create an instance of a tweepy StreamListener to handle the incoming data
+        api = tweepy.API(auth, api_root='/1.1')
+
+        counter = 0
+        remaining_hits=None
+        # Twitter API will only return 1000 items
+        TwitterItems = min(int(ITEM_LIMIT), int(numItems))
+        logging.info("User %s %s %s %s %s ", username, "Requested followers: ", numItems, "Searching Twitter for: ", TwitterItems)
+        for user in tweepy.Cursor(api.followers, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems):
+        # for user in userItems:
+                counter = counter + 1
+                print user.name.encode("utf-8"), user.screen_name.encode("utf-8"), user.description.encode("utf-8"), user.location.encode("utf-8"), user.url, user.profile_image_url, str(user.protected), user.followers_count, user.friends_count
+                print "\n"
+
+                try:
+                    # does this Twitter followers profile already exist in the table?
+                    query="select twitter_profile_pk from twitter_profiles where screen_name = %s"
+                    cursor.execute(query,(user.screen_name))
+                    row = cursor.fetchone()
+                    if row is not None:
+                        follower_twitter_profile_pk =row[0]
+                    else:
+                        # Existing record not found. So we create a new one
+                        # Insert the new profile
+                        query = '''insert into twitter_profiles 
+                        (username, screen_name, bio, location, url, 
+                        protected, profile_image_url, follower_count, following_count, alt_name_pk) 
+                        values ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                        # execute the query
+                        cursor.execute(query, (user.name.encode("utf-8"), 
+                                               user.screen_name.encode("utf-8"), 
+                                               user.description.encode("utf-8"), 
+                                               user.location.encode("utf-8"), 
+                                               user.url, 
+                                               str(user.protected), user.profile_image_url, 
+                                               user.followers_count, user.friends_count, alt_name_pk))
+                        # Insert the new candidate
+                        follower_twitter_profile_pk = cursor.lastrowid
+                    # Ignore duplicates if the primary key is already in the table
+                    query = "insert ignore into twitter_followers(twitter_profile_pk, follower_twitter_profile_pk, position_no) values ( %s, %s, %s)"
+                    # execute the query
+                    cursor.execute(query, (twitter_profile_pk, follower_twitter_profile_pk, counter))
+                
+                    # accept the change
+                    conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    logging.error( "Database exception %s", e)
+
+            
+                # Returns the remaining number of API requests available to the requesting user
+                # before the API limit of 180 requests every 15 minutes
+                # Calls to rate_limit_status do not count against the rate limit.
+                remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+           
+                if (remaining_hits < 5):# or counter % 160 == 0:
+                    print '\n' 
+                    print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+                    time.sleep(FIFTEEN_MIN)
+                else:
+                    pass
+                
+        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        print '\n'
+        print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+
+    except tweepy.error.TweepError as e:
+        logging.error("Tweepy error %s",  e.reason)
+
+
+def searchTwitterFollowing(dataset_pk, delete=False):
+    logging.info('searchTwitterFollowing')
+    try:
+        if dataset_pk:
+            # search for the followers
+            query= '''select c.dataset_pk, c.twitter_profile_pk, t.screen_Name, t.following_count 
+            from twitter_profiles t, twitter_candidates c 
+            where t.twitter_profile_pk = c.twitter_profile_pk 
+            and c.dataset_pk = %s
+             '''
+            #print query
+            cursor.execute(query,(dataset_pk))
+            all_rows = cursor.fetchall()
+            for row in all_rows:
+                # initialize query parameters for Twitter API
+                pk = row[0]
+                twitter_profile_pk = row[1]
+                screen_name = row[2]
+                following_count = row[3]
+
+                try:
+                    if delete:
+                        # Delete any old records associated with this record in the dataset
+                        query = "delete from twitter_following where twitter_profile_pk = %s"
+                        # execute the query
+                        cursor.execute(query, (twitter_profile_pk,))
+                        logging.debug("Twitter Following Rows deleted: %s", str(cursor.rowcount))
+                        delete=False
+
+                        # accept the change
+                        conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    logging.error("Database exception on delete %s", e)
+
+                twitterName = screen_name.encode("utf-8")
+                logging.debug("Twitter screen name is: %s", twitterName)
+
+                # Searching Twitter with an actual screen name should only match one row
+                totalResults=following_count
+                if totalResults > 0:
+                    getTwitterFollowing(dataset_pk, twitter_profile_pk, twitterName, totalResults, None)
+    except Exception as e:
+        logging.error("Database exception on select %s", e)
+
+def getTwitterFollowing(dataset_pk, twitter_profile_pk, username, numItems, alt_name_pk):
+    try:
+        # first set up authenticated API instance
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
+        #create an instance of a tweepy StreamListener to handle the incoming data
+        api = tweepy.API(auth, api_root='/1.1')
+
+        counter = 0
+        remaining_hits=None
+        # Twitter API will only return 1000 items
+        TwitterItems = min(int(ITEM_LIMIT), int(numItems))
+        logging.info("User %s %s %s %s %s",  username, "Requested friends/following: ", str(numItems), "Searching Twitter for: ", str(TwitterItems))
+       
+        for user in tweepy.Cursor(api.friends, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems):
+        #for user in userItems:
+                counter = counter + 1
+                print user.name.encode("utf-8"), user.screen_name.encode("utf-8"), user.description.encode("utf-8"), user.location.encode("utf-8"), user.url, user.profile_image_url, str(user.protected), user.followers_count, user.friends_count
+                print "\n"
+
+                try:
+                    # does this Twitter profile already exist in the table?
+                    query="select twitter_profile_pk from twitter_profiles where screen_name = %s"
+                    cursor.execute(query,(user.screen_name))
+                    row = cursor.fetchone()
+                    if row is not None:
+                        following_twitter_profile_pk =row[0]
+                    else:
+                        # Existing record not found. So we create a new one
+                        # Insert the new profile
+                        query = '''insert into twitter_profiles 
+                        (username, screen_name, bio, location, url, 
+                        protected, profile_image_url, follower_count, following_count, alt_name_pk) 
+                        values ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                        # execute the query
+                        cursor.execute(query, (user.name.encode("utf-8"), 
+                                               user.screen_name.encode("utf-8"), 
+                                               user.description.encode("utf-8"), 
+                                               user.location.encode("utf-8"), 
+                                               user.url, 
+                                               str(user.protected), user.profile_image_url, 
+                                               user.followers_count, user.friends_count, alt_name_pk))
+                        # Insert the new candidate
+                        following_twitter_profile_pk = cursor.lastrowid
+                    # Ignore duplicates if the primary key is already in the table
+                    query = "insert ignore into twitter_following (twitter_profile_pk, following_twitter_profile_pk, position_no) values ( %s, %s, %s)"
+                    # execute the query
+                    cursor.execute(query, (twitter_profile_pk, following_twitter_profile_pk, counter))
+                
+                    # accept the change
+                    conn.commit()
+                # Catch the database exception
+                except Exception as e:
+                    logging.error( "Database exception %s", e)
+                    
+
+            
+                # Returns the remaining number of API requests available to the requesting user
+                # before the API limit of 180 requests every 15 minutes
+                # Calls to rate_limit_status do not count against the rate limit.
+                remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+           
+                if (remaining_hits < 5):# or counter % 160 == 0:
+                    print '\n' 
+                    print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+                    logging.info ('You have %s %s %s', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() )
+                    time.sleep(FIFTEEN_MIN)
+                else:
+                    pass
+                
+        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        print '\n'
+        print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+        logging.info('You have %s %s %s', remaining_hits, 'API calls remaining in this window.', time.ctime())
+
+    except tweepy.error.TweepError as e:
+        logging.error('Tweepy Error %s', e.reason)
+
+def getLinkedinScreenName():
+    try:
+        query='''update research.linkedin 
+        set screen_name = replace(url_pub,'https://www.linkedin.com/in/','')
+        where url_pub like '%linkedin.com/in%'
+        '''
+        cursor.execute(query)
+        print "LinkedIn Screen Name updated for: ", cursor.rowcount, "rows"
+        # accept the change
+        conn.commit()
+
+    # Catch the database exception
+    except Exception as e:
+        print "Database exception", e
+
+
 def selectPerson():
+    logging.info('selectPerson')
     choice=None
     try:
         # Query for the list of people we want to find in the (T)raining set
@@ -835,16 +1378,32 @@ def selectPerson():
             print dataset_pk, first_name, last_name
         choice = raw_input(" Enter a number>>  ")
 
+        logging.info('Selected dataset key %s ', choice)
+
     # Catch the exception
     except Exception as e:
         print e
- 
+        logging.error(e)
+
+    # Return menu selection to the main program
     return choice
  
 ############################################################################             
 #  This is main procedure in this package
 ############################################################################
 def main(load=False):
+    urllib3.disable_warnings()
+
+    '''
+    C:\Python27\lib\site-packages\requests\packages\urllib3\util\ssl_.py:79: InsecurePlatformWarning: 
+    A true SSLContext object is not available. 
+    This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. 
+    For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+    InsecurePlatformWarning
+     '''
+
+    logging.info('\n=====================================================================')
+    logging.info('Started processing at: %s', time.ctime() )
 
     try:
         #1 Open a database connection
@@ -860,7 +1419,7 @@ def main(load=False):
         dataset_pk = selectPerson()
 
         if dataset_pk:
-            print "Processing key#", dataset_pk
+            logging.info('Processing key# %s', dataset_pk)
 
             #4. Construct alternative names using nickname variations
             #readSeedDB(dataset_pk)
@@ -870,23 +1429,28 @@ def main(load=False):
 
             #6. Yahoo Search for undiscovered public profiles on LinkedIn
             #searchYahoo(dataset_pk)
-    
+   
+            #6a Update potential screen names from LinkedIn
+            #getLinkedinScreenName()
+             
             #7. Retrieve public profiles to get educational affiliation(s)
             #linkedInAffiliation(dataset_pk)
 
             #8. Create 1st, 2nd, 3rd degree connections from LinkedIn "people also viewed"
             # on the public profile page
-            peopleAlsoViewed(dataset_pk, degree = 1)
+            #peopleAlsoViewed(dataset_pk, degree = 1)
             #peopleAlsoViewed(dataset_pk, degree = 2)
             #peopleAlsoViewed(dataset_pk, degree = 3)
 
 
-            #9. Search for Twitter profiles
-            #searchTwitterUsers(dataset_pk=None)
+            #9a. Search for Twitter profiles with cleanup of old data
+            #searchTwitterUsers(dataset_pk, delete=True)
 
-            #10. Twitter followers
+            #9b. Use derivatives, nicknames and the vanity URL from linkedin to derive a potential screen name
+            searchTwitterFollowers(dataset_pk, delete=True)
 
             #11. Twitter following
+            #searchTwitterFollowing(dataset_pk, delete=True)
 
             #12. Apply the scoring model
 
@@ -897,10 +1461,13 @@ def main(load=False):
         if conn.open:
             closeConnection()
 
+            
+        logging.info('Completed processing at: %s', time.ctime() )
+
     except ValueError as e:
-      print e
+      logging.error('Main: valueError %s', e)
     except Exception as e:
-      print e
+      logging.error('Main: Exception %s', e)
             
 if __name__ == '__main__':
     #mainMenu.main_menu()

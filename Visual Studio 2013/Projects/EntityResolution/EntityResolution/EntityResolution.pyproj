@@ -44,7 +44,7 @@
     <Compile Include="EntityResolution\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EntityResolution\searchTwitterUsers.py" />
+    <Compile Include="EntityResolution\archive\searchTwitterUsers.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
@@ -53,6 +53,8 @@
     <Folder Include="EntityResolution\" />
     <Folder Include="EntityResolution\data\" />
     <Folder Include="EntityResolution\data\nicknames\" />
+    <Folder Include="EntityResolution\logs\" />
+    <Folder Include="EntityResolution\archive\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.ini" />
