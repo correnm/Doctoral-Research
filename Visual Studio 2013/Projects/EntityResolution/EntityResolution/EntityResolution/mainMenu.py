@@ -24,7 +24,7 @@ menu_actions  = {}
 def main_menu():
     os.system('cls') # for windows
     
-    print "Welcome,\n"
+    print "Welcome, Entity Disambiguation\n"
     print "Please choose the menu you want to start:"
     print "1. New Search"
     print "2. Name Selection (Training Set)"

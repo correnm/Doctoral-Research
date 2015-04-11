@@ -10,6 +10,7 @@ from apiclient.discovery import build
 from BeautifulSoup import BeautifulSoup
 from ConfigParser import SafeConfigParser
 from collections import defaultdict
+from TwitterCredentials import credentials
 import mainMenu
 
 
@@ -20,13 +21,16 @@ import json
 import logging
 import os
 import pprint
+from py2neo import Graph
 import random
 import re
 import sys
 import time
 import urllib2
 import urllib
+import matplotlib.pyplot as plt
 import MySQLdb
+import networkx as nx
 import requests
 import mechanize
 import time
@@ -71,12 +75,28 @@ FIFTEEN_MIN=900 # seconds
 FIVE_MIN=300
 ITEM_LIMIT=1000
 
-# Initialize the oAuth authentication settings
-# Documentation: https://dev.twitter.com/docs/auth/oauth
-CONSUMER_KEY = "LrA1DdH1QJ5cfS8gGaWp0A"
-CONSUMER_SECRET = "9AX14EQBLjRjJM4ZHt2kNf0I4G77sKsYX1bEXQCW8"
-OAUTH_TOKEN = "1862092890-FrKbhD7ngeJtTZFZwf2SMjOPwgsCToq2A451iWi"
-OAUTH_SECRET = "AdMQmyfaxollI596G82FBipfSMhagv6hjlNKoLYjeg8"
+def loginTwitter():
+    # Initialize the oAuth authentication settings
+    # Documentation: https://dev.twitter.com/docs/auth/oauth
+    CONSUMER_KEY    = credentials['CONSUMER_KEY']       ## "LrA1DdH1QJ5cfS8gGaWp0A"
+    CONSUMER_SECRET = credentials['CONSUMER_SECRET']    ## "9AX14EQBLjRjJM4ZHt2kNf0I4G77sKsYX1bEXQCW8"
+    OAUTH_TOKEN     = credentials['OAUTH_TOKEN']        ## "1862092890-FrKbhD7ngeJtTZFZwf2SMjOPwgsCToq2A451iWi"
+    OAUTH_SECRET    = credentials['OAUTH_SECRET']       ## "AdMQmyfaxollI596G82FBipfSMhagv6hjlNKoLYjeg8"
+
+    api = None
+    try:
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
+        #create an instance of a tweepy StreamListener to handle the incoming data
+        api = tweepy.API(auth, api_root='/1.1')
+    except tweepy.error.TweepError as e:
+        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        print '\n'
+        print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+        logging.error('Tweepy Error from loginTwitter %s', e.reason)
+        logging.info('You have %s %s %s', remaining_hits, 'API calls remaining in this window.', time.ctime())
+        time.sleep(FIFTEEN_MIN)
+    return api
 
 # default affiliation
 affiliation='Regent University'
@@ -1145,19 +1165,31 @@ def getTwitterUsers(dataset_pk, username, numItems, alt_name_pk):
 
 def getTwitterFollowers(dataset_pk, twitter_profile_pk, username, numItems, alt_name_pk):
     try:
+        '''
         # first set up authenticated API instance
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
         #create an instance of a tweepy StreamListener to handle the incoming data
         api = tweepy.API(auth, api_root='/1.1')
+        '''
+
+        api=loginTwitter()
 
         counter = 0
-        remaining_hits=None
+        remaining_hits=api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        if remaining_hits == 0:
+            print '\n' 
+            print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+            time.sleep(FIFTEEN_MIN)
+
         # Twitter API will only return 1000 items
         TwitterItems = min(int(ITEM_LIMIT), int(numItems))
         logging.info("User %s %s %s %s %s ", username, "Requested followers: ", numItems, "Searching Twitter for: ", TwitterItems)
-        for user in tweepy.Cursor(api.followers, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems):
-        # for user in userItems:
+
+        userItems = tweepy.Cursor(api.followers, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems)
+        while True:
+            try:
+                user = userItems.next()
                 counter = counter + 1
                 print user.name.encode("utf-8"), user.screen_name.encode("utf-8"), user.description.encode("utf-8"), user.location.encode("utf-8"), user.url, user.profile_image_url, str(user.protected), user.followers_count, user.friends_count
                 print "\n"
@@ -1209,13 +1241,25 @@ def getTwitterFollowers(dataset_pk, twitter_profile_pk, username, numItems, alt_
                     time.sleep(FIFTEEN_MIN)
                 else:
                     pass
-                
+            
+            except tweepy.error.TweepError as e:
+                remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+                print '\n'
+                print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+                logging.error('Tweepy Error (a) %s', e.reason)
+                logging.info('You have %s %s %s', remaining_hits, 'API calls remaining in this window.', time.ctime())
+                time.sleep(FIFTEEN_MIN)
+                continue 
+            except StopIteration:
+                break
+
         remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
         print '\n'
         print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
 
     except tweepy.error.TweepError as e:
         logging.error("Tweepy error %s",  e.reason)
+        print "Tweepy error before loop initiated %s", e.reason
 
 
 def searchTwitterFollowing(dataset_pk, delete=False):
@@ -1265,20 +1309,29 @@ def searchTwitterFollowing(dataset_pk, delete=False):
 
 def getTwitterFollowing(dataset_pk, twitter_profile_pk, username, numItems, alt_name_pk):
     try:
+        '''
         # first set up authenticated API instance
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(OAUTH_TOKEN, OAUTH_SECRET)
         #create an instance of a tweepy StreamListener to handle the incoming data
         api = tweepy.API(auth, api_root='/1.1')
-
+        '''
+        
+        api = loginTwitter()
         counter = 0
-        remaining_hits=None
-        # Twitter API will only return 1000 items
+        remaining_hits=api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+        if remaining_hits == 0:
+            print '\n' 
+            print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
+            time.sleep(FIFTEEN_MIN)
+
+         # Twitter API will only return 1000 items
         TwitterItems = min(int(ITEM_LIMIT), int(numItems))
         logging.info("User %s %s %s %s %s",  username, "Requested friends/following: ", str(numItems), "Searching Twitter for: ", str(TwitterItems))
        
-        for user in tweepy.Cursor(api.friends, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems):
-        #for user in userItems:
+        userItems = tweepy.Cursor(api.friends, screen_name=username, monitor_rate_limit=True, wait_on_rate_limit=True, wait_on_rate_limit_notify=True).items(TwitterItems)
+        for user in userItems:
+            try:
                 counter = counter + 1
                 print user.name.encode("utf-8"), user.screen_name.encode("utf-8"), user.description.encode("utf-8"), user.location.encode("utf-8"), user.url, user.profile_image_url, str(user.protected), user.followers_count, user.friends_count
                 print "\n"
@@ -1317,29 +1370,31 @@ def getTwitterFollowing(dataset_pk, twitter_profile_pk, username, numItems, alt_
                 # Catch the database exception
                 except Exception as e:
                     logging.error( "Database exception %s", e)
-                    
-
             
                 # Returns the remaining number of API requests available to the requesting user
                 # before the API limit of 180 requests every 15 minutes
                 # Calls to rate_limit_status do not count against the rate limit.
                 remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
            
-                if (remaining_hits < 5):# or counter % 160 == 0:
+                if (remaining_hits < 2):# or counter % 160 == 0:
                     print '\n' 
                     print 'You have', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() 
                     logging.info ('You have %s %s %s', remaining_hits, 'API calls remaining in this window. Started sleeping at', time.ctime() )
                     time.sleep(FIFTEEN_MIN)
                 else:
                     pass
-                
-        remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
-        print '\n'
-        print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
-        logging.info('You have %s %s %s', remaining_hits, 'API calls remaining in this window.', time.ctime())
+        
+            except tweepy.error.TweepError as e:
+                remaining_hits = api.rate_limit_status('application')['resources']['application']['/application/rate_limit_status']['remaining']
+                print '\n'
+                print 'You have', remaining_hits, 'API calls remaining in this window.', time.ctime()
+                logging.error('Tweepy Error (a) %s', e.reason)
+                logging.info('You have %s %s %s', remaining_hits, 'API calls remaining in this window.', time.ctime())
+                time.sleep(FIFTEEN_MIN)
+                continue
 
     except tweepy.error.TweepError as e:
-        logging.error('Tweepy Error %s', e.reason)
+        logging.error('Tweepy Error (b) %s', e.reason)
 
 def getLinkedinScreenName():
     try:
@@ -1387,8 +1442,36 @@ def selectPerson():
 
     # Return menu selection to the main program
     return choice
- 
-############################################################################             
+
+def loadNeo():
+     
+def egoGraph(dataset_pk):
+    g = nx.Graph()
+
+    try:
+        # start with people
+        query= '''select dataset_pk, first_name, last_name from people where dataset_pk = %s '''
+        cursor.execute(query,(dataset_pk))
+        all_rows = cursor.fetchall()
+        for row in all_rows:
+            dataset_pk = row[0]
+            first_name = row[1]
+            last_name = row[2]
+            fullname = blank.join([first_name, last_name])
+            g.add_node(dataset_pk, name=fullname, color='#fcff00')    
+    
+        # draw the graph
+        print g.nodes()
+        plt.figure(figsize=(4,4))     
+        nx.draw(g)
+
+
+    # Catch the exception
+    except Exception as e:
+        print e
+        logging.error(e)
+
+##########################################################################             
 #  This is main procedure in this package
 ############################################################################
 def main(load=False):
@@ -1447,15 +1530,20 @@ def main(load=False):
             #searchTwitterUsers(dataset_pk, delete=True)
 
             #9b. Use derivatives, nicknames and the vanity URL from linkedin to derive a potential screen name
-            searchTwitterFollowers(dataset_pk, delete=True)
+            #searchTwitterFollowers(dataset_pk, delete=True)
+            # Re-process a particular screen name
+            #getTwitterFollowers(2,229,'Chelseaa_Kelley',1000,None)
 
             #11. Twitter following
             #searchTwitterFollowing(dataset_pk, delete=True)
 
-            #12. Apply the scoring model
+            #12 load into Neo4j
+            loadNeo ()
 
-            #13. Graph visualization
-             
+            #13. Apply the scoring model
+
+            #14. Graph visualization
+            #egoGraph (dataset_pk)  
 
         # Close the mySQL connection normally
         if conn.open:

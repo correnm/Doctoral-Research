@@ -1,0 +1,58 @@
+18:58:31,269 root INFO 
+=====================================================================
+18:58:31,269 root INFO Started processing at: Sun Apr 05 18:58:31 2015
+18:58:31,322 root INFO selectPerson
+18:58:35,864 root INFO Selected dataset key 1 
+18:58:35,865 root INFO Processing key# 1
+18:58:35,885 root ERROR global name 'first' is not defined
+18:58:35,887 root INFO Completed processing at: Sun Apr 05 18:58:35 2015
+18:59:35,266 root INFO 
+=====================================================================
+18:59:35,267 root INFO Started processing at: Sun Apr 05 18:59:35 2015
+18:59:35,319 root INFO selectPerson
+18:59:37,469 root INFO Selected dataset key 1 
+18:59:37,469 root INFO Processing key# 1
+18:59:37,707 root ERROR global name 'g' is not defined
+18:59:37,709 root INFO Completed processing at: Sun Apr 05 18:59:37 2015
+19:00:28,322 root INFO 
+=====================================================================
+19:00:28,322 root INFO Started processing at: Sun Apr 05 19:00:28 2015
+19:00:28,375 root INFO selectPerson
+19:00:30,385 root INFO Selected dataset key 1 
+19:00:30,387 root INFO Processing key# 1
+19:00:30,720 root INFO Completed processing at: Sun Apr 05 19:00:30 2015
+19:46:37,243 root INFO 
+=====================================================================
+19:46:37,243 root INFO Started processing at: Sun Apr 05 19:46:37 2015
+19:46:37,296 root INFO selectPerson
+19:46:43,647 root INFO Selected dataset key 1 
+19:46:43,648 root INFO Processing key# 1
+19:46:43,994 root INFO Completed processing at: Sun Apr 05 19:46:43 2015
+19:52:45,654 root INFO 
+=====================================================================
+19:52:45,654 root INFO Started processing at: Sun Apr 05 19:52:45 2015
+19:52:45,707 root INFO selectPerson
+19:52:49,428 root INFO Selected dataset key 1 
+19:52:49,430 root INFO Processing key# 1
+19:52:49,759 root INFO Completed processing at: Sun Apr 05 19:52:49 2015
+20:27:33,413 root INFO 
+=====================================================================
+20:27:33,414 root INFO Started processing at: Sun Apr 05 20:27:33 2015
+20:27:33,467 root INFO selectPerson
+20:27:36,575 root INFO Selected dataset key 1 
+20:27:36,575 root INFO Processing key# 1
+20:27:36,667 root INFO Completed processing at: Sun Apr 05 20:27:36 2015
+20:33:32,974 root INFO 
+=====================================================================
+20:33:32,976 root INFO Started processing at: Sun Apr 05 20:33:32 2015
+20:33:33,29 root INFO selectPerson
+20:33:34,805 root INFO Selected dataset key 1 
+20:33:34,805 root INFO Processing key# 1
+20:33:35,142 root INFO Completed processing at: Sun Apr 05 20:33:35 2015
+20:44:10,204 root INFO 
+=====================================================================
+20:44:10,220 root INFO Started processing at: Fri Apr 10 20:44:10 2015
+20:44:10,313 root INFO selectPerson
+20:44:13,630 root INFO Selected dataset key 0 
+20:44:13,630 root INFO Processing key# 0
+20:44:13,645 root ERROR Main: Exception global name 'loadNeo' is not defined

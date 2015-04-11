@@ -38,6 +38,9 @@
     <Compile Include="EntityResolution\mainMenu.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EntityResolution\TwitterCredentials.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>
