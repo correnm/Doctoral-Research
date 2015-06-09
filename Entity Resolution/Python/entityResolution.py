@@ -72,14 +72,51 @@ FIFTEEN_MIN=900 # seconds
 FIVE_MIN=300
 ITEM_LIMIT=1000
 
+def scrapePage(url, format="source"):
+
+  try:
+    # Return in either raw view "source" format or as beautiful "soup"
+    pageSource = None
+    if url:
+      #package the request
+      url=url.encode('utf8')
+
+      # Understanding the user agent string (http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx)
+      randomUserAgent=random.choice(BROWSERS)
+      headers=dict()
+      headers['User-Agent'] = randomUserAgent
+    
+      #print headers
+      response=requests.get(url, headers=headers)
+      if response.status_code == 200:
+        html=response.text
+        # decode byte stream to unicode
+        #html = html.decode("utf-8","ignore")
+        # encode to ASCII byte stream, removing characters with codes >127
+        html = html.encode("ascii", "ignore") 
+        soup = BeautifulSoup(html)
+
+        if format == "soup":
+          pageSource = soup
+        else:
+          pageSource = html
+    else:
+      # no URL passed
+      pageSource = None
+  except Exception as e:
+    print e
+  return pageSource
+  
+
 def saveWebPage(name, network, url):
   
   logging.info("saveWebPage %s %s %s", name, network, url)
   
   archiveDir = "./archive/"
   now = datetime.datetime.today().strftime("%Y%m%d-%H%M%S")
-  filename = archiveDir + ''.join(name.split()) + "_" + ''.join(network.split()) + "_" + now + '.html'
-  headerfilename = archiveDir + ''.join(name.split()) + "_" + ''.join(network.split()) + "_header_" + now + '.txt'
+  # Don't include the date in the file name. Use the file system time associated with the file.
+  filename =       archiveDir + ''.join(name.split()) + "_" + ''.join(network.split()) + '.html'
+  headerfilename = archiveDir + ''.join(name.split()) + "_" + ''.join(network.split()) + "_header_" + '.txt'
 
   #package the request
   url=url.encode('utf8')
@@ -250,15 +287,18 @@ def readSeedDB(param_dataset_pk=None):
     dataset.clear()
     try:
         # Query for the list of people we want to find in the (T)raining set
-        cursor.execute('''SELECT dataset_pk, first_name, last_name
+        # Middle name can be null in the table. Convert to the empty string
+        cursor.execute('''SELECT dataset_pk, first_name, IFNULL(middle_name,''), last_name  
         FROM people where record_type= 'T' and dataset_pk = %s ''', param_dataset_pk)
         all_rows = cursor.fetchall()
         for row in all_rows:
             # row[0] returns the first column in the query (name), row[1] returns second column.
-            dataset[row[0]].append((row[1].lower(), row[2].lower()))
-            dataset_pk = row[0]
-            first_name = row[1].lower()
-            last_name  = row[2].lower()
+            dataset[row[0]].append(( row[1].lower(), row[2].lower(), row[3].lower() ))
+            dataset_pk  = row[0]
+            first_name  = row[1].lower()
+            middle_name = row[2].lower()
+            last_name   = row[3].lower()
+
             #print('{0} : {1}, {2}'.format(row[0], row[1], row[2]))
 
             try:
@@ -268,10 +308,24 @@ def readSeedDB(param_dataset_pk=None):
                 cursor.execute(query, (dataset_pk,))
                 print "Rows deleted:", cursor.rowcount
 
-                # Insert the new name for the original records
-                query = "insert into people_alt_names (dataset_pk, first_name, last_Name, name_type) values (%s, %s, %s, %s)"
+                # (1) Insert the new name for the original records
+                query = "insert into people_alt_names (dataset_pk, first_name, middle_name, last_Name, name_type) values (%s, %s, %s, %s, %s)"
                 # execute the query
-                cursor.execute(query, (dataset_pk,first_name, last_name, name_type_orig,))
+                cursor.execute(query, (dataset_pk,first_name, middle_name, last_name, name_type_orig,))
+
+                # (2) first, middle initial, last
+                if middle_name and len(middle_name) >= 1:
+                  middle_init = middle_name[0]
+                  query = "insert into people_alt_names (dataset_pk, first_name, middle_name, last_Name, name_type) values (%s, %s, %s, %s, %s)"
+                  # execute the query
+                  cursor.execute(query, (dataset_pk, first_name, middle_init, last_name, name_type_alias,))
+                  
+                # (3) first initial, middle name, last
+                if first_name and middle_name and len(middle_name) >= 1:
+                  first_init = first_name[0]
+                  query = "insert into people_alt_names (dataset_pk, first_name, middle_name, last_Name, name_type) values (%s, %s, %s, %s, %s)"
+                  # execute the query
+                  cursor.execute(query, (dataset_pk, first_init, middle_name, last_name, name_type_alias,))
                 
                 # accept the change
                 conn.commit()
@@ -332,12 +386,13 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
     
     # search for each person's public profile on LinkedIn using primary key
     # Query for the list of people we want to find in the (T)raining set
-    cursor.execute('''SELECT dataset_pk, first_name, last_name, alt_name_pk FROM people_alt_names where dataset_pk = %s ''', dataset_pk)
+    cursor.execute('''SELECT dataset_pk, first_name, ifnull(middle_name,''), last_name, alt_name_pk FROM people_alt_names where dataset_pk = %s ''', dataset_pk)
     all_rows = cursor.fetchall()
     for row in all_rows:
         # initialize query parameters for search engine
         pk = row[0]
         first = None
+        middle= None
         last = None
         fullname = None
         alt_name_pk = None
@@ -358,11 +413,20 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
             print "Database exception", e
             logging.error("SearchGoogleCSE: Database exception %s", e)
 
-        first = row[1]
-        last = row[2]
-        fullname = blank.join([first, last])
-        searchName = termsep.join([first, last])
-        alt_name_pk =  row[3]        
+        first  = row[1]
+        middle = row[2]
+        last   = row[3]
+        alt_name_pk =  row[4]
+
+        # use the middle name/init if it exists
+        if middle:
+          fullname = blank.join([blank.join([first, middle]), last])
+          searchName = termsep.join( [termsep.join([first, middle]) , last])
+        else:
+          fullname = blank.join([first, last])
+          searchName = termsep.join([first, last])
+          
+      
         # format search parameters
         searchString = "allintitle:"+searchName
         print
@@ -413,7 +477,7 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
                 ).execute()
 
                 position = 0
-                while (response != None): 
+                while (response is not None): 
                   totalResults = response.get('queries').get('request')[0].get('totalResults',0)
                   print "About", totalResults, "Results"
 
@@ -434,20 +498,72 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
                       print "resolved URL", final_url
                       location = res.get('pagemap',{}).get('person')[0].get('location')
                       print "Location", location
+
+                      # Get the page source returned in Beautiful Soup format CORREN
+                      soup = scrapePage(final_url, "soup")
+                      topCard = soup.html.body.find('div',{'id' : 'top-card'})
+                      profilePicture = topCard.find('div', {'class': 'profile-picture'})
+                      profileImageTemp = profilePicture.find('img')['src']
+                      profileImageURL = finalURL(profileImageTemp)
+                      print "picture", profileImageURL
+
+                      headlineTemp = topCard.find('div', {'id' : 'headline'})
+                      headline = headlineTemp.find('p').text
+                      print "headline", headline
+
+                      industry=topCard.find('dd',{'class' : 'industry'}).text
+                      print "industry", industry
+                      # there can be up to three websites listed on a public profile
+                      websites = topCard.find('tr', {'id': 'overview-summary-websites'})
                       
-                      # does this profile already exist in the table?
+                      if websites:
+                        for temp in websites.findAll('li'):
+                          websiteURL=None
+                          siteAnchor = temp.find('a')['href']
+                          if siteAnchor:
+                            websiteURL = finalURL(siteAnchor)
+                            print "website", websiteURL
+                      
+                      '''
+
+                if schoolsAttended:
+                    for temp in schoolsAttended.findAll('h4',{'class':'summary fn org'}):
+                      education = temp.find('a',{'title':'More details for this school'})
+                      if education:
+                        universityName = education.string
+photo = temp.find('img', {'class' : ''})['src']
+                      print "Photo: ", photo
+                      h4 = temp.find('h4')
+                      temp_url = h4.find('a')
+                      #print "temp:", temp_url
+                      url = temp_url['href'].strip('?trk=pub-pbmap')
+                      final_url=finalURL(url)
+                      print "URL: ", url, final_url
+                      fullname =temp_url.contents[0]
+                      print "Full name", fullname
+                      profileTitle = temp.find('p',{'class': 'browse-map-title'}).string
+                      print "Title", profileTitle
+                      '''
+                      
+                      # does this profile already exist in the table (i.e., same publicuURL)?
                       query="select linkedin_pk from linkedin where url_pub = %s"
                       cursor.execute(query,(final_url))
                       row = cursor.fetchone()
                       if row is not None:
+                          # save the existing primary key to use later. @TODO Should we update with latest information?
                           linkedin_pk =row[0]
+                          # update in case the information changed
+                          
                       else:
-                          # Existing record not found. So we create a new one
-                          # add each result to the table
+                          # Existing record not found. So we create a new record with data scraped from the page.
                           query="insert into linkedin (title, location, url_pub, full_name, search_engine, alt_name_pk) values (%s, %s, %s, %s, %s, %s)"
                           cursor.execute(query,(title, location, final_url, resultFullname, searchEngine, alt_name_pk))
+                          # get the primary key from new record
                           linkedin_pk = cursor.lastrowid
-                          conn.commit()
+                      # save the insert or update statement
+                      conn.commit()
+                         
+                          
                       print "linkedin_pk %s " % linkedin_pk 
                       print "pk %s" % pk 
                       print "position %s" % position
@@ -457,6 +573,7 @@ def searchGoogleCSE(dataset_pk, delete=True, startPage=1):
                       # archive the html for the web page
                       saveWebPage(resultFullname.replace(" ","_"), 'linkedin', final_url)
                       try:
+                        # insert into linkedin_candidates. we will ignore duplicate keys
                         cursor.execute(query,(pk, linkedin_pk, position))
                         conn.commit()
                       except MySQLdb.Error, e:
@@ -1517,7 +1634,7 @@ def selectPerson():
     choice=None
     try:
         # Query for the list of people we want to find in the (T)raining set
-        cursor.execute('''SELECT dataset_pk, first_name, last_name FROM people where record_type= 'T'
+        cursor.execute('''SELECT dataset_pk, first_name, IFNULL(middle_name,''), last_name FROM people where record_type= 'T'
         ''', )
         all_rows = cursor.fetchall()
         os.system('cls') # for windows    
@@ -1529,8 +1646,9 @@ def selectPerson():
             dataset[row[0]].append((row[1].lower(), row[2].lower()))
             dataset_pk = row[0]
             first_name = row[1].lower()
-            last_name  = row[2].lower()
-            print dataset_pk, first_name, last_name
+            middle_name  = row[2].lower()
+            last_name = row[3].lower()
+            print dataset_pk, first_name, middle_name, last_name
         choice = raw_input(" Enter a number>>  ")
 
         logging.info('Selected dataset key %s ', choice)
@@ -1700,13 +1818,13 @@ def main(load=False):
 
         if dataset_pk:
             logging.info('Processing key# %s', dataset_pk)
-            
+         
             #4. Construct alternative names using nickname variations
             readSeedDB(dataset_pk)
-
+            
             #5. Google Search for public profiles on LinkedIn
             searchGoogleCSE(dataset_pk)
-
+            '''
             #6. Yahoo Search for undiscovered public profiles on LinkedIn
             #searchYahoo(dataset_pk)
    
@@ -1735,7 +1853,7 @@ def main(load=False):
             
             #11. Twitter following
             searchTwitterFollowing(dataset_pk, delete=True)
-
+            '''
             #12. Apply the scoring model to the candidate entities
             '''
             linkedinEditDistance(dataset_pk)
